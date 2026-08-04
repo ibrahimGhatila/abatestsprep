@@ -10,24 +10,28 @@ import { PetalMark } from '@/components/Logo';
  */
 export default function Marquee({
   items,
-  duration = 52,
+  duration = 40,
   tone = 'ink',
   className = '',
 }: {
   items: readonly string[];
-  /** Seconds for one full pass. Slower reads as confident; faster as frantic. */
+  /** Seconds for one full pass. */
   duration?: number;
   tone?: 'ink' | 'cream';
   className?: string;
 }) {
   const textTone = tone === 'cream' ? 'text-cream' : 'text-ink';
-  const markTone = tone === 'cream' ? 'text-amber' : 'text-orange';
+  const markTone = tone === 'cream' ? 'text-cream/50' : 'text-orange';
 
   const Row = ({ hidden = false }: { hidden?: boolean }) => (
     <ul className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
       {items.map((item, i) => (
         <li key={`${item}-${i}`} className="flex items-center whitespace-nowrap">
-          <span className={`font-display text-[clamp(1.5rem,3.4vw,2.75rem)] leading-none ${textTone}`}>{item}</span>
+          <span
+            className={`text-[clamp(1.5rem,3.4vw,2.75rem)] font-extrabold leading-none tracking-[-0.03em] ${textTone}`}
+          >
+            {item}
+          </span>
           <PetalMark className={`mx-[clamp(1.25rem,3vw,3rem)] h-4 w-4 shrink-0 ${markTone}`} strokeWidth={3.2} />
         </li>
       ))}

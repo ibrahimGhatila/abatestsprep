@@ -36,7 +36,7 @@ export default function PageHeader({
               </Eyebrow>
             </Reveal>
             <Reveal delay={0.06}>
-              <h1 className="font-display text-display-lg text-ink text-balance md:-ml-[0.05em]">
+              <h1 className="font-black text-display-lg text-ink text-balance md:-ml-[0.05em]">
                 {title}
                 {markWord && (
                   <>
@@ -50,16 +50,16 @@ export default function PageHeader({
 
           {lede && (
             <Reveal className="col-span-4 md:col-span-5 md:col-start-8" delay={0.12}>
-              <p className="text-lg leading-relaxed text-ink/70 text-pretty">{lede}</p>
+              <p className="text-lg leading-[1.6] text-ink/70 text-pretty">{lede}</p>
             </Reveal>
           )}
 
           {meta && meta.length > 0 && (
             <Reveal className="col-span-4 md:col-span-12" delay={0.16}>
-              <dl className="flex flex-wrap gap-x-12 gap-y-6 border-t border-ink/15 pt-7">
+              <dl className="flex flex-wrap gap-x-12 gap-y-6 border-t-2 border-ink/15 pt-7">
                 {meta.map((item) => (
                   <div key={item.label}>
-                    <dt className="font-brand text-eyebrow font-semibold uppercase text-ink/45">{item.label}</dt>
+                    <dt className="text-eyebrow font-semibold uppercase text-ink/45">{item.label}</dt>
                     <dd className="mt-1.5 max-w-[34ch] text-sm leading-snug text-ink/75">{item.value}</dd>
                   </div>
                 ))}

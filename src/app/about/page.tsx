@@ -30,7 +30,7 @@ export default function AboutPage() {
             {aboutPage.body.map((block) => (
               <RevealItem key={block.heading} className="col-span-4 md:col-span-10 md:col-start-2">
                 <div className="grid-12 gap-y-4">
-                  <h2 className="col-span-4 font-display text-2xl leading-tight text-ink md:col-span-3">
+                  <h2 className="col-span-4 font-extrabold text-2xl leading-tight text-ink md:col-span-3">
                     {block.heading}
                   </h2>
                   <p className="col-span-4 max-w-prose text-[1.0625rem] leading-[1.75] text-ink/75 text-pretty md:col-span-7 md:col-start-5">
@@ -45,7 +45,7 @@ export default function AboutPage() {
 
           <div className="grid-12 gap-y-10">
             <Reveal className="col-span-4 md:col-span-5">
-              <h2 className="font-display text-display-sm text-ink">Academic oversight</h2>
+              <h2 className="font-black text-display-sm text-ink">Academic oversight</h2>
               <p className="mt-6 max-w-prose text-[1.0625rem] leading-[1.7] text-ink/70">
                 {why.authority.name} advises on how we diagnose, plan and measure progress.
               </p>

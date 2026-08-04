@@ -2,7 +2,7 @@
 
 import { useId, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { EASE_EXPO } from '@/lib/motion';
+import { EASE_SNAP } from '@/lib/motion';
 import { useReducedMotionPref } from '@/lib/useMotionPreference';
 
 export type AccordionItem = { q: string; a: string };
@@ -24,14 +24,14 @@ export default function Accordion({ items, defaultOpen = 0 }: { items: Accordion
   const reduced = useReducedMotionPref();
 
   return (
-    <div className="border-t border-ink/15">
+    <div className="border-t-2 border-ink/15">
       {items.map((item, i) => {
         const isOpen = open === i;
         const panelId = `${baseId}-panel-${i}`;
         const buttonId = `${baseId}-button-${i}`;
 
         return (
-          <div key={item.q} className="border-b border-ink/15">
+          <div key={item.q} className="border-b-2 border-ink/15">
             <h3>
               <button
                 id={buttonId}
@@ -43,7 +43,7 @@ export default function Accordion({ items, defaultOpen = 0 }: { items: Accordion
                 className="group flex w-full items-start justify-between gap-8 py-7 text-left"
               >
                 <span
-                  className={`font-display text-[clamp(1.15rem,2.2vw,1.6rem)] leading-tight transition-colors duration-300 ${
+                  className={`text-[clamp(1.1rem,2vw,1.5rem)] font-extrabold leading-tight tracking-[-0.02em] transition-colors duration-200 ${
                     isOpen ? 'text-ember' : 'text-ink group-hover:text-orange-deep'
                   }`}
                 >
@@ -76,12 +76,12 @@ export default function Accordion({ items, defaultOpen = 0 }: { items: Accordion
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{
-                    height: { duration: reduced ? 0 : 0.5, ease: EASE_EXPO },
-                    opacity: { duration: reduced ? 0 : 0.35, ease: 'linear' },
+                    height: { duration: reduced ? 0 : 0.32, ease: EASE_SNAP },
+                    opacity: { duration: reduced ? 0 : 0.22, ease: 'linear' },
                   }}
                   className="overflow-hidden"
                 >
-                  <p className="max-w-prose pb-8 pr-10 text-[0.975rem] leading-relaxed text-ink/70 text-pretty">
+                  <p className="max-w-prose pb-8 pr-10 text-[0.975rem] leading-[1.6] text-ink/70">
                     {item.a}
                   </p>
                 </motion.div>

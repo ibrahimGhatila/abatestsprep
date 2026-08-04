@@ -13,7 +13,7 @@ export const hero = {
     { text: 'you' },
     { text: 'global.', mark: true },
   ],
-  sub: 'Digital SAT, IELTS, TOEFL, YDS and UDSP — decoded into a plan built around you.',
+  sub: 'DSAT, UDSP, IELTS, TOEFL, PTE and YDS — decoded into a plan built around you.',
   scrollHint: 'Scroll',
 } as const;
 
@@ -47,31 +47,27 @@ export const marquee = {
 
 export const gap = {
   eyebrow: 'The gap',
-  headline: [
-    { text: 'Most students study hard.' },
-    { text: 'Few study', emphasis: false },
-    { text: 'right.', mark: true },
-  ],
   lede: 'Effort is rarely the missing piece. Direction is.',
   body: [
     'The default way to prepare for an exam is to start at the front of the book and work to the back. It feels productive. It is also how a student spends six weeks revising the things they could already do, and walks into the exam having never fixed the four things that were actually costing them points.',
     'We start the other way around. A diagnostic first, so we know precisely where the marks are leaking — a content gap, a pacing problem, a question type that never got taught properly. Then we build the plan around those, and only those.',
-    'It is a smaller amount of studying. It is a much larger amount of progress.',
   ],
   pullQuote: 'You do not need to study everything. You need to study the right things, in the right order.',
+  ctaLabel: 'Find your gaps — free',
 } as const;
 
 export const examsSection = {
   eyebrow: 'Exams we prepare',
-  headline: 'Five exams. One method.',
+  headline: 'Six exams. One method.',
   sub: 'Each has its own logic, its own traps and its own shortest route to the score you need.',
-  dragHint: 'Drag or scroll',
+  hint: 'Tap an exam to open it',
 } as const;
 
 export const method = {
   eyebrow: 'How it works',
   headline: 'Four steps, in this order.',
   sub: 'Nothing here is a surprise. That is rather the point.',
+  ctaLabel: 'Start with step 01 — free',
   steps: [
     {
       index: '01',
@@ -102,7 +98,6 @@ export const method = {
 
 export const why = {
   eyebrow: 'Why ABA',
-  headline: 'Evidence, not enthusiasm.',
   pillars: [
     {
       title: 'Evidence-based',
@@ -125,7 +120,53 @@ export const why = {
     // and a short approved biography. Nothing here should be written for her.
     photo: null as string | null,
     bio: 'TODO(client): approved biography to be supplied.',
-    quote: null as string | null,
+  },
+} as const;
+
+/**
+ * Pricing.
+ *
+ * Two steps only, and the free one is the primary action everywhere on the
+ * page. The premium figure is the one hard number the client gave us; every
+ * inclusion under it is marked for confirmation.
+ */
+export const pricing = {
+  eyebrow: 'Pricing',
+  headline: 'Two steps. The first one is free.',
+  sub: 'You do not pay to find out where you stand. You pay for the programme that closes the gap — and only once you know what that gap actually is.',
+  free: {
+    kicker: 'Step one',
+    name: 'Free level analysis',
+    price: 'Free',
+    priceNote: 'No card, no obligation',
+    summary: 'A real diagnostic under exam conditions, then an honest read on your level and your reachable target.',
+    includes: [
+      'A full diagnostic in your exam, under real timing',
+      'Your current level, and the specific gaps behind it',
+      'An honest answer on what your target score would take',
+      'A written summary you keep, whether or not you continue',
+    ],
+    cta: { label: 'Book your free analysis', href: '/contact' },
+  },
+  premium: {
+    kicker: 'Step two',
+    name: 'Premium Prep',
+    price: '$5,000',
+    priceNote: 'Full-service programme',
+    summary: 'The complete programme: your plan, your tutor, your mocks, and support all the way through to submission.',
+    // TODO(client): confirm every line below, plus what the $5,000 covers in
+    // terms of duration, session count and exam scope. Nothing here should be
+    // published until the client has signed it off.
+    includes: [
+      'Full diagnostic plus an honest reachability read',
+      'A personal plan built around your weak spots',
+      '1-on-1 coaching with expert tutors',
+      'Unlimited timed mocks, each returned with feedback',
+      'Application and score-submission support',
+      'Direct access to your tutor between sessions',
+    ],
+    cta: { label: 'Talk to us about Premium', href: '/contact' },
+    todo: 'Confirm programme duration, session count, exam scope and refund terms before publishing this panel.',
   },
 } as const;
 
@@ -141,7 +182,7 @@ export const results = {
     { value: 0, suffix: '', label: 'Students prepared', todo: true },
     { value: 0, suffix: '', label: 'Average score improvement', todo: true },
     { value: 0, suffix: '%', label: 'Reached their target band', todo: true },
-    { value: 0, suffix: '', label: 'Universities offers received', todo: true },
+    { value: 0, suffix: '', label: 'University offers received', todo: true },
   ],
   // TODO(client): real testimonial with the student's consent, name and exam.
   testimonial: {
@@ -151,10 +192,17 @@ export const results = {
   },
 } as const;
 
-export const freeAnalysis = {
+export const midCta = {
   eyebrow: 'Start here',
-  headline: 'Not sure where you stand? Find out — free.',
+  headline: 'Not sure where you stand?',
+  headlineMark: 'Find out — free.',
   sub: 'One diagnostic session. Your real level, your gaps, and a straight answer on what your target score would take. No obligation after it.',
+} as const;
+
+export const finalCta = {
+  eyebrow: 'Last thing',
+  headline: 'Your target score has a deadline.',
+  sub: 'The sooner we know where you stand, the more of the plan is still available to you. Start with the free analysis.',
 } as const;
 
 /**
@@ -175,6 +223,11 @@ export const faq = {
       a: 'Work backwards from your university list — it dictates what is accepted, and that decides the exam more often than preference does. Where several are accepted, the choice comes down to how you read, write and speak under time. The free level analysis covers this before you commit to anything.',
     },
     {
+      q: 'What does Premium Prep include, and what does $5,000 cover?',
+      // TODO(client): confirm duration, session count and exam scope.
+      a: 'TODO(client): confirm. Draft answer — Premium Prep is the full-service programme: diagnostic, personal plan, 1-on-1 coaching, unlimited marked mocks, application support and direct access to your tutor between sessions. The exact duration and session count are set at the diagnostic, once we know the distance to your target.',
+    },
+    {
       q: 'Do you teach online or in person?',
       // TODO(client): confirm delivery formats and locations.
       a: 'TODO(client): confirm. Draft answer — both. Lessons run online for students outside the city and in person where that works better, with the same materials and the same tracking either way.',
@@ -182,11 +235,6 @@ export const faq = {
     {
       q: 'What happens in the free level analysis?',
       a: 'You sit a real diagnostic under exam conditions, then we go through it together: where the marks went, why, and what a realistic target looks like from here. You leave with the read on your level whether or not you study with us.',
-    },
-    {
-      q: 'Do you help with university applications too?',
-      // TODO(client): confirm the scope of application support offered.
-      a: 'TODO(client): confirm scope. Draft answer — yes. A score is a means to an offer, so the final stage of the method covers turning it into an application the universities on your list take seriously.',
     },
     {
       q: 'What if my target score is not realistic in the time I have?',

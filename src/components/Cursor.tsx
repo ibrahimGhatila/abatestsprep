@@ -81,7 +81,7 @@ export default function Cursor() {
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
         {label && (
-          <span className="font-brand text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-ember">
+          <span className="text-[0.55rem] font-semibold uppercase tracking-[0.12em] text-ember">
             {label}
           </span>
         )}

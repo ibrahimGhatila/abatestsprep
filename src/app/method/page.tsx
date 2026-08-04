@@ -32,7 +32,7 @@ export default function MethodPage() {
         lede={methodPage.lede}
       />
 
-      <StepPin steps={method.steps} banner="upward" />
+      <StepPin steps={method.steps} />
 
       <section className="bg-cream py-section">
         <div className="shell">
@@ -41,7 +41,7 @@ export default function MethodPage() {
               <Eyebrow tone="orange" className="mb-7">
                 Principles
               </Eyebrow>
-              <h2 className="font-display text-display-sm text-ink">Why in that order.</h2>
+              <h2 className="font-black text-display-sm text-ink">Why in that order.</h2>
             </div>
 
             <RevealList as="ol" className="col-span-4 md:col-span-7 md:col-start-6" stagger={0.09}>
@@ -49,13 +49,13 @@ export default function MethodPage() {
                 <RevealItem
                   as="li"
                   key={principle.title}
-                  className="border-t border-ink/15 py-9 first:border-t-0 first:pt-0"
+                  className="border-t-2 border-ink/15 py-9 first:border-t-0 first:pt-0"
                 >
                   <div className="flex items-baseline gap-5">
-                    <span className="font-brand text-[0.7rem] font-semibold tracking-[0.16em] text-orange">
+                    <span className="text-[0.7rem] font-semibold tracking-[0.12em] text-orange">
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <h3 className="font-display text-[clamp(1.5rem,2.6vw,2rem)] leading-tight text-ink">
+                    <h3 className="font-extrabold text-[clamp(1.5rem,2.6vw,2rem)] leading-tight text-ink">
                       {principle.title}
                     </h3>
                   </div>

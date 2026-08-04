@@ -5,8 +5,15 @@ import { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useFinePointer, useReducedMotionPref } from '@/lib/useMotionPreference';
 
-type Variant = 'primary' | 'ghost' | 'invert';
-type Size = 'md' | 'lg';
+/**
+ * `primary`  — solid orange, ember wipe on hover. The booking action.
+ * `ghost`    — outlined, for secondary actions on cream.
+ * `invert`   — outlined cream, for charcoal blocks.
+ * `onOrange` — solid cream with ink text, for orange blocks where a solid
+ *              orange button would be invisible.
+ */
+type Variant = 'primary' | 'ghost' | 'invert' | 'onOrange';
+type Size = 'sm' | 'md' | 'lg';
 
 type BaseProps = {
   children: React.ReactNode;
@@ -24,30 +31,48 @@ type ButtonProps = BaseProps &
 const MotionLink = motion.create(Link);
 
 const base =
-  'group relative inline-flex select-none items-center justify-center overflow-hidden rounded-pill font-brand font-semibold ' +
-  'tracking-[0.01em] transition-colors duration-300 ease-expo focus-visible:outline-offset-4';
+  'group relative inline-flex select-none items-center justify-center overflow-hidden rounded-pill font-semibold ' +
+  'uppercase tracking-[0.09em] transition-colors duration-200 ease-snap focus-visible:outline-offset-4';
 
 const sizes: Record<Size, string> = {
-  md: 'h-11 px-6 text-[0.8rem]',
-  lg: 'h-14 px-8 text-[0.875rem]',
+  sm: 'h-10 px-5 text-[0.68rem]',
+  md: 'h-12 px-6 text-[0.72rem]',
+  lg: 'h-14 px-8 text-[0.78rem]',
 };
 
 const variants: Record<Variant, string> = {
   primary: 'bg-orange text-white',
-  ghost: 'border border-ink/25 bg-transparent text-ink hover:border-ink/50',
-  invert: 'border border-cream/30 bg-transparent text-cream hover:border-cream/70',
+  ghost: 'border-2 border-ink/25 bg-transparent text-ink hover:border-ink',
+  invert: 'border-2 border-cream/35 bg-transparent text-cream hover:border-cream',
+  onOrange: 'bg-cream text-ink',
+};
+
+/** The colour that wipes up on hover, per variant. */
+const wipes: Record<Variant, string> = {
+  primary: 'bg-ember',
+  ghost: 'bg-ink',
+  invert: 'bg-cream',
+  onOrange: 'bg-ink',
+};
+
+/** Label colour once the wipe has covered the button. */
+const wipeText: Record<Variant, string> = {
+  primary: 'group-hover:text-white',
+  ghost: 'group-hover:text-cream',
+  invert: 'group-hover:text-ink',
+  onOrange: 'group-hover:text-cream',
 };
 
 /**
  * Magnetic button.
  *
  * Two things happen on hover: the button leans toward the cursor (capped at a
- * few pixels — enough to feel alive, not enough to feel broken), and on the
- * primary variant an ember fill wipes up from the bottom edge. Both are
- * disabled for coarse pointers and reduced motion, where they'd be noise.
+ * few pixels — enough to feel alive, not enough to feel broken), and an ember
+ * fill wipes up from the bottom edge in 220ms. Both are disabled for coarse
+ * pointers and reduced motion, where they'd be noise.
  */
 export default function Button(props: ButtonProps) {
-  const { children, variant = 'primary', size = 'md', className = '', magnet = 0.28 } = props;
+  const { children, variant = 'primary', size = 'md', className = '', magnet = 0.3 } = props;
 
   const ref = useRef<HTMLElement | null>(null);
   const fine = useFinePointer();
@@ -56,8 +81,8 @@ export default function Button(props: ButtonProps) {
 
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const x = useSpring(mx, { stiffness: 320, damping: 22, mass: 0.4 });
-  const y = useSpring(my, { stiffness: 320, damping: 22, mass: 0.4 });
+  const x = useSpring(mx, { stiffness: 420, damping: 20, mass: 0.3 });
+  const y = useSpring(my, { stiffness: 420, damping: 20, mass: 0.3 });
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (!magnetic || !ref.current) return;
@@ -75,20 +100,13 @@ export default function Button(props: ButtonProps) {
 
   const content = (
     <>
-      {/* ember wipe — sits under the label, scales up from the bottom edge */}
-      {variant === 'primary' && (
-        <span
-          aria-hidden="true"
-          className="absolute inset-0 origin-bottom scale-y-0 bg-ember transition-transform duration-500 ease-expo group-hover:scale-y-100 motion-reduce:transition-none"
-        />
-      )}
-      {variant !== 'primary' && (
-        <span
-          aria-hidden="true"
-          className="absolute inset-0 origin-bottom scale-y-0 bg-amber/20 transition-transform duration-500 ease-expo group-hover:scale-y-100 motion-reduce:transition-none"
-        />
-      )}
-      <span className="relative z-10 flex items-center gap-2">{children}</span>
+      <span
+        aria-hidden="true"
+        className={`absolute inset-0 origin-bottom scale-y-0 transition-transform duration-[220ms] ease-snap group-hover:scale-y-100 motion-reduce:transition-none ${wipes[variant]}`}
+      />
+      <span className={`relative z-10 flex items-center gap-2 transition-colors duration-[220ms] ${wipeText[variant]}`}>
+        {children}
+      </span>
     </>
   );
 

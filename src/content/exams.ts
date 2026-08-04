@@ -1,6 +1,6 @@
 /**
- * The five exams. Each entry drives both the home-page card and the
- * /exams/[slug] page, so copy stays in one place.
+ * The six exams, in the order the client specified. Each entry drives both the
+ * home-page list and the /exams/[slug] page, so copy stays in one place.
  *
  * `keyDates` is deliberately empty: exam calendars change every year and
  * nothing unverified should ship. Fill it in from the official board site.
@@ -15,8 +15,10 @@ export type ExamKeyDate = {
 export type Exam = {
   slug: string;
   name: string;
+  /** Expanded name shown under the big list entry. */
+  fullName: string;
   index: string;
-  /** One-line hook used on the horizontal card. */
+  /** One-line hook used on the expanding list row. */
   hook: string;
   purpose: string;
   audience: string;
@@ -26,24 +28,24 @@ export type Exam = {
   prep: { title: string; body: string }[];
   /** TODO(client): verified dates only. See note above. */
   keyDates: ExamKeyDate[];
-  accent: 'orange' | 'ember' | 'amber' | 'deep';
 };
 
 export const exams: Exam[] = [
   {
-    slug: 'digital-sat',
-    name: 'Digital SAT',
+    slug: 'dsat',
+    name: 'DSAT',
+    fullName: 'Digital SAT',
     index: '01',
-    hook: 'The adaptive one. Section two changes based on how you handled section one.',
-    purpose: 'Undergraduate admission to universities in the US and a growing list beyond it.',
+    hook: 'Adaptive, scored to 1600. Section two changes based on how you handled section one.',
+    purpose: 'Undergraduate admission to US and global universities.',
     audience: 'High-school students applying abroad for a bachelor’s degree.',
     intro:
       'The SAT went digital and adaptive, which changed what a good score actually requires. Pace matters more. The second module of each section adjusts to your first, so early accuracy compounds. Preparing for it like the old paper test is the most common way students lose points they already knew how to win.',
     format: [
       { section: 'Reading & Writing', detail: 'Two adaptive modules of short passages, one question each.' },
       { section: 'Math', detail: 'Two adaptive modules; a calculator is allowed throughout.' },
+      { section: 'Scoring', detail: 'Out of 1600, combining the two section scores.' },
       { section: 'Delivery', detail: 'Taken on a laptop or tablet through the official testing app.' },
-      { section: 'Length', detail: 'Roughly two hours plus a break — shorter than the paper test.' },
     ],
     prep: [
       {
@@ -60,14 +62,44 @@ export const exams: Exam[] = [
       },
     ],
     keyDates: [],
-    accent: 'orange',
+  },
+  {
+    slug: 'udsp',
+    name: 'UDSP',
+    // TODO(client): confirm what UDSP expands to and replace this label. It is
+    // deliberately generic rather than a guess at the acronym.
+    fullName: 'Alternative admissions pathway',
+    index: '02',
+    hook: 'An alternative admissions route for students it fits better than a test-only application.',
+    purpose: 'An alternative admissions pathway to placement abroad.',
+    audience: 'Students whose strongest case is not made by a single test score.',
+    intro:
+      'UDSP suits students whose strongest case is not made by a single test score. We map the requirements against your profile before you commit time to it, because the right answer here is sometimes "prepare something else instead".',
+    format: [
+      // TODO(client): confirm the official structure and replace verbatim from source.
+      { section: 'Structure', detail: 'TODO — confirm current official format before publishing.' },
+      { section: 'Eligibility', detail: 'TODO — confirm current eligibility rules.' },
+    ],
+    prep: [
+      {
+        title: 'Fit check first',
+        body: 'A free session establishing whether this route genuinely serves your target list before any prep begins.',
+      },
+      {
+        title: 'Requirement mapping',
+        body: 'Your profile against the requirements, gap by gap, with a realistic timeline.',
+      },
+      { title: 'Guided preparation', body: 'Structured work on whatever the route actually assesses, with checkpoints.' },
+    ],
+    keyDates: [],
   },
   {
     slug: 'ielts',
     name: 'IELTS',
-    index: '02',
-    hook: 'Four skills, one band score, and a speaking room most students walk into cold.',
-    purpose: 'English proficiency for universities, visas and immigration across the UK, Australia, Canada and Europe.',
+    fullName: 'International English Language Testing System',
+    index: '03',
+    hook: 'The most widely accepted English test — the UK, Europe and beyond.',
+    purpose: 'English proficiency for universities, visas and immigration worldwide.',
     audience: 'Anyone who needs a band score on record — undergraduate, postgraduate or professional.',
     intro:
       'IELTS is not an English test so much as an English performance. The band descriptors reward specific, teachable behaviours, and most students lose half a band to habits nobody ever told them about — not to a vocabulary gap.',
@@ -92,13 +124,13 @@ export const exams: Exam[] = [
       },
     ],
     keyDates: [],
-    accent: 'ember',
   },
   {
     slug: 'toefl',
     name: 'TOEFL iBT',
-    index: '03',
-    hook: 'Academic English, integrated tasks, and a clock that rewards structure over eloquence.',
+    fullName: 'Test of English as a Foreign Language',
+    index: '04',
+    hook: 'Academic English, integrated tasks — most common for North American universities.',
     purpose: 'English proficiency, most commonly for North American universities.',
     audience: 'Students applying where TOEFL is preferred, or who read and write more comfortably than they speak.',
     intro:
@@ -121,14 +153,43 @@ export const exams: Exam[] = [
       { title: 'Scored mocks', body: 'Full-length attempts marked against the official rubric with a rescoring plan.' },
     ],
     keyDates: [],
-    accent: 'amber',
+  },
+  {
+    slug: 'pte',
+    name: 'PTE',
+    fullName: 'Pearson Test of English',
+    index: '05',
+    hook: 'Fast, computer-scored, and increasingly accepted across the UK and Australia.',
+    purpose: 'English proficiency for UK and Australian universities and visas.',
+    audience: 'Students who want a quick turnaround and are comfortable being marked by a machine.',
+    intro:
+      'PTE is scored by algorithm, which changes the preparation entirely. There is no examiner to persuade — there is a scoring engine with known preferences around fluency, pronunciation and content coverage. Students who learn what it rewards tend to move fast.',
+    format: [
+      { section: 'Speaking & Writing', detail: 'A combined section — read aloud, describe, summarise, essay.' },
+      { section: 'Reading', detail: 'Multiple choice, re-ordering and fill-in-the-blanks.' },
+      { section: 'Listening', detail: 'Summarise spoken text, dictation and comprehension items.' },
+      { section: 'Scoring', detail: 'Computer-marked, with results typically returned quickly.' },
+    ],
+    prep: [
+      {
+        title: 'Train for the scoring engine',
+        body: 'Fluency and pronunciation carry disproportionate weight. We drill delivery, not just answers.',
+      },
+      {
+        title: 'The high-yield task types',
+        body: 'A handful of item types feed multiple skill scores at once. Those get worked first.',
+      },
+      { title: 'Timed full mocks', body: 'Complete attempts under the real clock with per-item accuracy tracking.' },
+    ],
+    keyDates: [],
   },
   {
     slug: 'yds',
     name: 'YDS',
-    index: '04',
-    hook: 'Turkey’s academic English exam — grammar-dense, vocabulary-hungry, deeply learnable.',
-    purpose: 'Academic and professional English certification in Turkey — graduate study, academic posts, public roles.',
+    fullName: 'Yabancı Dil Bilgisi Seviye Tespit Sınavı',
+    index: '06',
+    hook: 'Turkey’s academic English exam: grammar-dense, vocabulary-hungry, deeply learnable.',
+    purpose: 'Academic and professional English certification in Turkey.',
     audience: 'Students and professionals who need a Turkish-recognised English score.',
     intro:
       'YDS rewards a very particular kind of preparation. The question types repeat year after year, the vocabulary set is finite, and the grammar is testable. That makes it one of the most improvable exams we teach — if the study is systematic rather than enthusiastic.',
@@ -150,36 +211,6 @@ export const exams: Exam[] = [
       { title: 'Timed past papers', body: 'Full sittings under exam conditions with per-type accuracy tracking.' },
     ],
     keyDates: [],
-    accent: 'deep',
-  },
-  {
-    slug: 'udsp',
-    name: 'UDSP',
-    index: '05',
-    hook: 'The route many students overlook — and the one that fits some of them best.',
-    purpose: 'An alternative admissions pathway for students targeting placement abroad.',
-    audience: 'Students whose profile fits a pathway route better than a standard test-only application.',
-    // Deliberately non-specific: the exact scope varies by year and institution.
-    intro:
-      'UDSP suits students whose strongest case is not made by a single test score. We map the requirements against your profile before you commit time to it, because the right answer here is sometimes "prepare something else instead".',
-    format: [
-      // TODO(client): confirm the official structure and replace these lines verbatim from source.
-      { section: 'Structure', detail: 'TODO — confirm current official format before publishing.' },
-      { section: 'Eligibility', detail: 'TODO — confirm current eligibility rules.' },
-    ],
-    prep: [
-      {
-        title: 'Fit check first',
-        body: 'A free session establishing whether this route genuinely serves your target list before any prep begins.',
-      },
-      {
-        title: 'Requirement mapping',
-        body: 'Your profile against the requirements, gap by gap, with a realistic timeline.',
-      },
-      { title: 'Guided preparation', body: 'Structured work on whatever the route actually assesses, with checkpoints.' },
-    ],
-    keyDates: [],
-    accent: 'orange',
   },
 ];
 

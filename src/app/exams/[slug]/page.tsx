@@ -66,7 +66,7 @@ export default async function ExamPage({ params }: { params: Promise<{ slug: str
               <Eyebrow tone="orange">What it is</Eyebrow>
             </Reveal>
             <Reveal className="col-span-4 md:col-span-8 md:col-start-5" delay={0.06}>
-              <p className="font-display text-[clamp(1.4rem,2.8vw,2.25rem)] leading-[1.25] text-ink text-pretty">
+              <p className="font-extrabold text-[clamp(1.4rem,2.8vw,2.25rem)] leading-[1.25] text-ink text-pretty">
                 {exam.intro}
               </p>
             </Reveal>
@@ -82,17 +82,17 @@ export default async function ExamPage({ params }: { params: Promise<{ slug: str
               <Eyebrow tone="orange" className="mb-7">
                 Format
               </Eyebrow>
-              <h2 className="font-display text-display-sm text-ink">How the paper is built.</h2>
+              <h2 className="font-black text-display-sm text-ink">How the paper is built.</h2>
             </div>
 
             <RevealList as="dl" className="col-span-4 md:col-span-7 md:col-start-6" stagger={0.07}>
               {exam.format.map((row) => (
-                <RevealItem key={row.section} className="border-t border-ink/15 py-6 first:border-t-0 first:pt-0">
+                <RevealItem key={row.section} className="border-t-2 border-ink/15 py-6 first:border-t-0 first:pt-0">
                   <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:gap-8">
-                    <dt className="font-brand text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-ink md:w-52 md:shrink-0">
+                    <dt className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-ink md:w-52 md:shrink-0">
                       {row.section}
                     </dt>
-                    <dd className="text-[0.975rem] leading-relaxed text-ink/70">{row.detail}</dd>
+                    <dd className="text-[0.975rem] leading-[1.6] text-ink/70">{row.detail}</dd>
                   </div>
                 </RevealItem>
               ))}
@@ -109,19 +109,19 @@ export default async function ExamPage({ params }: { params: Promise<{ slug: str
               <Eyebrow tone="orange" className="mb-7">
                 How we prep it
               </Eyebrow>
-              <h2 className="font-display text-display-md text-ink">
+              <h2 className="font-black text-display-md text-ink">
                 The parts of {exam.name} that actually move a score.
               </h2>
             </div>
 
             <RevealList as="ol" className="col-span-4 md:col-span-6 md:col-start-7" stagger={0.09}>
               {exam.prep.map((item, i) => (
-                <RevealItem as="li" key={item.title} className="border-t border-ink/15 py-9 first:border-t-0 first:pt-0">
+                <RevealItem as="li" key={item.title} className="border-t-2 border-ink/15 py-9 first:border-t-0 first:pt-0">
                   <div className="flex items-baseline gap-5">
-                    <span className="font-brand text-[0.7rem] font-semibold tracking-[0.16em] text-orange">
+                    <span className="text-[0.7rem] font-semibold tracking-[0.12em] text-orange">
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <h3 className="font-display text-2xl leading-tight text-ink">{item.title}</h3>
+                    <h3 className="font-extrabold text-2xl leading-tight text-ink">{item.title}</h3>
                   </div>
                   <p className="mt-4 max-w-prose text-[1.0625rem] leading-[1.7] text-ink/70 text-pretty">{item.body}</p>
                 </RevealItem>
@@ -140,14 +140,14 @@ export default async function ExamPage({ params }: { params: Promise<{ slug: str
               <Eyebrow tone="orange" className="mb-6">
                 Key dates
               </Eyebrow>
-              <h2 className="font-display text-display-sm text-ink">When you can sit it.</h2>
+              <h2 className="font-black text-display-sm text-ink">When you can sit it.</h2>
             </div>
             <div className="col-span-4 md:col-span-7 md:col-start-6">
               {exam.keyDates.length > 0 ? (
                 <dl>
                   {exam.keyDates.map((date) => (
-                    <div key={date.label} className="border-t border-ink/15 py-6 first:border-t-0 first:pt-0">
-                      <dt className="font-display text-xl text-ink">{date.label}</dt>
+                    <div key={date.label} className="border-t-2 border-ink/15 py-6 first:border-t-0 first:pt-0">
+                      <dt className="font-extrabold text-xl text-ink">{date.label}</dt>
                       <dd className="mt-2 text-[0.95rem] text-ink/70">
                         {date.window}
                         {date.note && <span className="block text-ink/50">{date.note}</span>}
@@ -173,7 +173,7 @@ export default async function ExamPage({ params }: { params: Promise<{ slug: str
         <div className="shell">
           <div className="grid-12 gap-y-12">
             <div className="col-span-4 md:col-span-6">
-              <h2 className="font-display text-display-md text-cream text-balance">
+              <h2 className="font-black text-display-md text-cream text-balance">
                 Find out where you stand on {exam.name}.
               </h2>
               <p className="mt-7 max-w-prose text-lg leading-relaxed text-cream/70">
@@ -190,16 +190,16 @@ export default async function ExamPage({ params }: { params: Promise<{ slug: str
             </div>
 
             <nav aria-label="Other exams" className="col-span-4 md:col-span-4 md:col-start-9">
-              <h2 className="font-brand text-eyebrow font-semibold uppercase text-cream/40">Other exams</h2>
+              <h2 className="text-eyebrow font-semibold uppercase text-cream/40">Other exams</h2>
               <ul className="mt-7">
                 {others.map((other) => (
-                  <li key={other.slug} className="border-t border-cream/15">
+                  <li key={other.slug} className="border-t-2 border-cream/15">
                     <Link
                       href={`/exams/${other.slug}`}
                       data-cursor="link"
                       className="group flex items-center justify-between gap-6 py-5"
                     >
-                      <span className="font-display text-2xl text-cream transition-colors duration-300 group-hover:text-amber">
+                      <span className="font-extrabold text-2xl text-cream transition-colors duration-300 group-hover:text-amber">
                         {other.name}
                       </span>
                       <PetalMark

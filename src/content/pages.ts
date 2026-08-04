@@ -8,7 +8,7 @@ export const aboutPage = {
   body: [
     {
       heading: 'What we do',
-      text: 'We prepare students for the exams that open international university admission: the Digital SAT, IELTS, TOEFL, YDS and UDSP. Every student starts with a diagnostic and leaves with a plan that names what to study and, just as importantly, what to skip.',
+      text: 'We prepare students for the exams that open international university admission: the DSAT, UDSP, IELTS, TOEFL, PTE and YDS. Every student starts with a diagnostic and leaves with a plan that names what to study and, just as importantly, what to skip.',
     },
     {
       heading: 'How we work',

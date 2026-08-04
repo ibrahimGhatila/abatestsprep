@@ -13,7 +13,7 @@ type Props = {
 };
 
 /**
- * Eyebrow + oversized Fraunces heading + optional lede.
+ * Eyebrow + oversized Poppins-900 heading + optional lede.
  *
  * Deliberately left-aligned with no centred option. Centred headings over
  * full-width sections are the single most recognisable tell of a template,
@@ -42,7 +42,7 @@ export default function SectionHeading({
         </Reveal>
       )}
       <Reveal delay={0.06}>
-        <Tag className={`font-display ${headingSize} ${headingTone} text-balance`}>{children}</Tag>
+        <Tag className={`font-black ${headingSize} ${headingTone} text-balance`}>{children}</Tag>
       </Reveal>
       {lede && (
         <Reveal delay={0.14}>

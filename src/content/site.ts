@@ -9,12 +9,13 @@ export const site = {
   url: 'https://abatestsprep.com',
   positioning: 'Smart prep for studying abroad.',
   description:
-    'Digital SAT, IELTS, TOEFL, YDS and UDSP prep for students heading to global universities — decoded into a plan built around you.',
+    'DSAT, UDSP, IELTS, TOEFL, PTE and YDS prep for students heading to global universities — decoded into a plan built around you.',
 } as const;
 
 export const nav = [
   { label: 'Exams', href: '/#exams' },
   { label: 'Method', href: '/#method' },
+  { label: 'Pricing', href: '/#pricing' },
   { label: 'Results', href: '/#results' },
   { label: 'Blog', href: '/blog' },
 ] as const;
@@ -22,6 +23,12 @@ export const nav = [
 export const contact = {
   instagramHandle: '@abatestsprep',
   instagramUrl: 'https://instagram.com/abatestsprep',
+  // TODO(client): confirm these three social handles — the Instagram handle is
+  // the only one that was supplied. The others are best guesses at the URL
+  // shape and MUST be checked before launch.
+  tiktokUrl: 'https://www.tiktok.com/@abatestsprep',
+  linkedinUrl: 'https://www.linkedin.com/company/abatestsprep',
+  threadsUrl: 'https://www.threads.net/@abatestsprep',
   // TODO(client): confirm the public contact address before launch.
   email: 'hello@abatestsprep.com',
   // TODO(client): real WhatsApp business number in E.164, no spaces.
@@ -33,42 +40,57 @@ export const contact = {
 export const cta = {
   primary: { label: 'Book a free level analysis', href: contact.bookingUrl },
   secondary: { label: 'See how it works', href: '/#method' },
+  login: { label: 'Log in', href: '/login' },
 } as const;
 
+export const whatsappUrl = `https://wa.me/${contact.whatsapp.replace(/[^0-9]/g, '')}`;
+
 /**
- * Art-directed banners.
+ * Art-directed banners, served from the weserv image CDN.
  *
- * TODO(assets): the four banner photographs were not available when this was
- * built — each path below currently points at a warm placeholder. Drop the real
- * files into /public/banners with the same names (or edit `src` here) and
- * nothing else needs to change. Keep the stated aspect ratios so no layout
- * shifts: every banner is rendered with `fill` inside a fixed-ratio frame.
+ * These URLs already carry their own resize/encode parameters (`w=2048`,
+ * `output=jpg`, `q=95`), so `Banner` renders them with `unoptimized` — running
+ * them through Next's optimizer as well would re-encode an already-optimised
+ * JPEG for no gain and add a server round trip.
+ *
+ * Every banner sits on a flat brand-colour block, so a slow or failed image
+ * load degrades to a solid panel rather than to a hole in the page.
  */
+const cdn = (id: string) =>
+  `https://images.weserv.nl/?url=www.trybloom.ai/img/${id}&output=jpg&q=95&w=2048`;
+
 export const banners = {
   hero: {
-    src: '/banners/hero.svg',
-    alt: 'A student working through practice papers at a sunlit desk.',
-    width: 1600,
-    height: 2000,
+    src: cdn('3388952a-25b0-4734-a67a-010fafe249e6'),
+    // TODO(client): replace with alt text describing what is actually in the
+    // photograph — this describes the intended subject, not the shot.
+    alt: 'An ABA Tests Prep student preparing for an international exam.',
   },
   journey: {
-    src: '/banners/journey.svg',
-    alt: 'A path winding upward through open landscape.',
-    width: 1600,
-    height: 1200,
+    src: cdn('e2ed1638-1dda-4851-9531-63526fdba54a'),
+    alt: 'The route a student takes from first diagnostic to final score.',
   },
   upward: {
-    src: '/banners/upward.svg',
-    alt: 'Steps rising toward a bright horizon.',
-    width: 2000,
-    height: 1400,
+    src: cdn('354cf176-06a9-4606-ae5c-c2eac19cac14'),
+    alt: 'Progress climbing toward a target score.',
   },
   community: {
-    src: '/banners/community.svg',
-    alt: 'Students together on a university campus.',
-    width: 2000,
-    height: 1200,
+    src: cdn('013c0200-d151-4bf6-9719-3282ffb7f216'),
+    alt: 'ABA Tests Prep students together.',
   },
 } as const;
 
 export type BannerKey = keyof typeof banners;
+
+export const socials = [
+  { label: 'Instagram', handle: contact.instagramHandle, href: contact.instagramUrl, icon: 'instagram' },
+  { label: 'TikTok', handle: contact.instagramHandle, href: contact.tiktokUrl, icon: 'tiktok' },
+  { label: 'LinkedIn', handle: 'ABA Tests Prep', href: contact.linkedinUrl, icon: 'linkedin' },
+  { label: 'Threads', handle: contact.instagramHandle, href: contact.threadsUrl, icon: 'threads' },
+] as const;
+
+export const legalNav = [
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms', href: '/terms' },
+  { label: 'Cancellation Policy', href: '/cancellation' },
+] as const;

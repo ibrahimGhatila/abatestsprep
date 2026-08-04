@@ -81,22 +81,23 @@ export default function ContactPage() {
               <Banner
                 name="community"
                 ratio="4/3"
-                scrim="warm"
+                scrim="none"
+                bg="bg-orange"
                 sizes="(max-width: 768px) 100vw, 45vw"
-                className="rounded-sm"
+                
               />
 
-              <h2 className="mt-12 font-display text-display-sm text-ink">What happens next.</h2>
+              <h2 className="mt-12 font-black text-display-sm text-ink">What happens next.</h2>
               <RevealList as="ol" className="mt-9" stagger={0.08}>
                 {contactPage.steps.map((step, i) => (
-                  <RevealItem as="li" key={step.title} className="border-t border-ink/15 py-6 first:border-t-0 first:pt-0">
+                  <RevealItem as="li" key={step.title} className="border-t-2 border-ink/15 py-6 first:border-t-0 first:pt-0">
                     <div className="flex items-baseline gap-5">
-                      <span className="font-brand text-[0.7rem] font-semibold tracking-[0.16em] text-orange">
+                      <span className="text-[0.7rem] font-semibold tracking-[0.12em] text-orange">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <div>
-                        <h3 className="font-display text-xl leading-tight text-ink">{step.title}</h3>
-                        <p className="mt-2 max-w-prose text-[0.95rem] leading-relaxed text-ink/70">{step.text}</p>
+                        <h3 className="font-extrabold text-xl leading-tight text-ink">{step.title}</h3>
+                        <p className="mt-2 max-w-prose text-[0.95rem] leading-[1.6] text-ink/70">{step.text}</p>
                       </div>
                     </div>
                   </RevealItem>
@@ -132,12 +133,12 @@ function ContactRow({
       href={href}
       data-cursor="link"
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      className="group flex items-baseline justify-between gap-6 border-t border-ink/15 py-6 transition-colors duration-300 hover:border-ink/40"
+      className="group flex items-baseline justify-between gap-6 border-t-2 border-ink/15 py-6 transition-colors duration-300 hover:border-ink/40"
     >
-      <span className="font-display text-[clamp(1.5rem,3vw,2.25rem)] leading-none text-ink transition-colors duration-300 group-hover:text-ember">
+      <span className="font-extrabold text-[clamp(1.5rem,3vw,2.25rem)] leading-none text-ink transition-colors duration-300 group-hover:text-ember">
         {label}
       </span>
-      <span className="font-brand text-[0.72rem] uppercase tracking-[0.14em] text-ink/50">{value}</span>
+      <span className="text-[0.72rem] uppercase tracking-[0.12em] text-ink/50">{value}</span>
     </a>
   );
 }

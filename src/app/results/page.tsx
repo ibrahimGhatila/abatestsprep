@@ -36,7 +36,7 @@ export default function ResultsPage() {
         <div className="shell">
           <div className="grid-12 gap-y-12">
             <Reveal className="col-span-4 md:col-span-7 md:col-start-3">
-              <p className="font-display text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.2] text-ink text-balance">
+              <p className="font-extrabold text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.2] text-ink text-balance">
                 We would rather show you nothing than show you a number we cannot stand behind.
               </p>
               <p className="mt-8 max-w-prose text-[1.0625rem] leading-[1.75] text-ink/70 text-pretty">

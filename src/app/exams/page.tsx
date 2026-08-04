@@ -9,7 +9,7 @@ import { exams } from '@/content/exams';
 
 export const metadata: Metadata = {
   title: 'Exams we prepare',
-  description: 'Digital SAT, IELTS, TOEFL, YDS and UDSP preparation.',
+  description: 'DSAT, UDSP, IELTS, TOEFL, PTE and YDS preparation.',
   alternates: { canonical: '/exams' },
 };
 
@@ -26,7 +26,7 @@ export default function ExamsIndexPage() {
     <>
       <PageHeader
         eyebrow="Exams"
-        title="Five exams, five different"
+        title="Six exams, six different"
         markWord="problems."
         lede="Each has its own logic and its own shortest route to the score you need. Pick the one you are sitting."
       />
@@ -35,13 +35,13 @@ export default function ExamsIndexPage() {
         <div className="shell">
           <RevealList as="ul" stagger={0.07}>
             {exams.map((exam) => (
-              <RevealItem as="li" key={exam.slug} className="border-t border-ink/15 last:border-b">
+              <RevealItem as="li" key={exam.slug} className="border-t-2 border-ink/15 last:border-b">
                 <Link href={`/exams/${exam.slug}`} data-cursor="link" className="group block py-10">
                   <div className="grid-12 items-baseline gap-y-4">
-                    <span className="col-span-1 font-brand text-[0.7rem] font-semibold tracking-[0.16em] text-orange">
+                    <span className="col-span-1 text-[0.7rem] font-semibold tracking-[0.12em] text-orange">
                       {exam.index}
                     </span>
-                    <h2 className="col-span-3 font-display text-[clamp(2rem,5vw,3.5rem)] leading-none text-ink transition-colors duration-500 group-hover:text-ember md:col-span-5">
+                    <h2 className="col-span-3 font-extrabold text-[clamp(2rem,5vw,3.5rem)] leading-none text-ink transition-colors duration-500 group-hover:text-ember md:col-span-5">
                       {exam.name}
                     </h2>
                     <p className="col-span-4 max-w-prose text-[0.975rem] leading-relaxed text-ink/65 md:col-span-5 md:col-start-7">
@@ -60,7 +60,7 @@ export default function ExamsIndexPage() {
           <Reveal className="mt-20" delay={0.1}>
             <div className="grid-12">
               <div className="col-span-4 md:col-span-6 md:col-start-6">
-                <p className="font-display text-[clamp(1.4rem,2.6vw,2rem)] leading-tight text-ink">
+                <p className="font-extrabold text-[clamp(1.4rem,2.6vw,2rem)] leading-tight text-ink">
                   Not sure which one your university list actually requires?
                 </p>
                 <Button href={contact.bookingUrl} className="mt-8" size="lg">

@@ -11,8 +11,8 @@ export default function NotFound() {
             <Eyebrow tone="orange" className="mb-8">
               404
             </Eyebrow>
-            <h1 className="font-display text-display-lg text-ink">This page went off-syllabus.</h1>
-            <p className="mt-8 max-w-prose text-lg leading-relaxed text-ink/70">
+            <h1 className="font-black text-display-lg text-ink">This page went off-syllabus.</h1>
+            <p className="mt-8 max-w-prose text-lg leading-[1.6] text-ink/70">
               The link is broken or the page has moved. The exams, the method and the booking page are all still where
               you left them.
             </p>

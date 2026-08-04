@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Inter, Poppins } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 
 import Grain from '@/components/Grain';
@@ -8,35 +8,22 @@ import SmoothScroll from '@/components/SmoothScroll';
 import PageReveal from '@/components/PageReveal';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import StickyCta from '@/components/StickyCta';
 import { site } from '@/content/site';
 
 /**
- * Fraunces carries the whole editorial identity. `opsz` is loaded so large
- * headlines get the display cut of the typeface rather than a text cut scaled
- * up — that difference is most of what separates "editorial" from "big serif".
+ * Poppins, and only Poppins.
+ *
+ * The full weight range is loaded because the type system runs on weight
+ * contrast: 900 for display numerals and headlines, 800 for headings, 600 for
+ * subheads/labels/buttons, 400–500 for body. Four static cuts are cheaper than
+ * a second family and give the page far more range than mixing two would.
  */
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  variable: '--font-fraunces',
-  display: 'swap',
-  // Variable weight axis + the optical-size and shape axes. `weight` is
-  // omitted deliberately: declaring it would pin the font to static cuts and
-  // `axes` would no longer be allowed.
-  axes: ['SOFT', 'WONK', 'opsz'],
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-// Poppins is the brand font: nav, buttons, eyebrows, labels.
 const poppins = Poppins({
   subsets: ['latin'],
   variable: '--font-poppins',
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800', '900'],
 });
 
 export const metadata: Metadata = {
@@ -64,7 +51,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={poppins.variable}>
       <body>
         <Grain />
         <Cursor />
@@ -74,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main">{children}</main>
           <Footer />
         </SmoothScroll>
+        <StickyCta />
       </body>
     </html>
   );
