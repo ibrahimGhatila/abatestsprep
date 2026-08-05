@@ -53,7 +53,7 @@ export default function AboutPage() {
             <Reveal className="col-span-4 md:col-span-6 md:col-start-7" delay={0.08}>
               {/* TODO(client): approved biography and photograph. */}
               <TodoNote>
-                Approved biography, title and photograph for {why.authority.name} to be supplied. Nothing about this
+                An approved biography and confirmed title for {why.authority.name} are still to be supplied. Nothing about this
                 person should be written on her behalf — see{' '}
                 <code className="font-mono text-[0.9em]">why.authority</code> in{' '}
                 <code className="font-mono text-[0.9em]">/src/content/home.ts</code>.

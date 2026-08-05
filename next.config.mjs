@@ -8,6 +8,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.weserv.nl' },
       { protocol: 'https', hostname: 'www.trybloom.ai' },
+      { protocol: 'https', hostname: 'gamzesart.com' },
     ],
     // Local placeholder art is still SVG.
     dangerouslyAllowSVG: true,

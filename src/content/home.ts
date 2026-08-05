@@ -116,9 +116,14 @@ export const why = {
     name: 'Prof. Dr. Gamze Sart',
     // TODO(client): confirm the exact role wording and any titles to display.
     role: 'Academic advisor',
-    // TODO(client): supply an approved photograph — /public/people/gamze-sart.jpg
-    // and a short approved biography. Nothing here should be written for her.
-    photo: null as string | null,
+    /**
+     * Supplied by the client. Hotlinked from gamzesart.com — consider saving
+     * a copy to /public/people/gamze-sart.webp and pointing this there, so the
+     * footer of the site does not depend on another domain staying up.
+     */
+    photo: 'https://gamzesart.com/img/gamze-sart.webp',
+    // TODO(client): a short approved biography is still outstanding. Nothing
+    // here should be written on her behalf.
     bio: 'TODO(client): approved biography to be supplied.',
   },
 } as const;

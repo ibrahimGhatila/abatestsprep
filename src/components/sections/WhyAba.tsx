@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import Eyebrow from '@/components/ui/Eyebrow';
 import Marker from '@/components/ui/Marker';
@@ -53,16 +54,22 @@ export default function WhyAba() {
             <Reveal delay={0.1} className="mt-10 lg:mt-0">
               <figure className="flex max-w-md items-center gap-5 border-2 border-ink/12 bg-cream p-4">
                 {why.authority.photo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  /* `object-top` because portraits crop from the bottom, not
+                     through the face. Rendered at 2x for retina and
+                     `unoptimized` so it is fetched straight from the source
+                     rather than round-tripping through the optimizer. */
+                  <Image
                     src={why.authority.photo}
                     alt={why.authority.name}
-                    className="aspect-[4/5] w-24 shrink-0 object-cover"
+                    width={224}
+                    height={280}
+                    unoptimized
+                    className="aspect-[4/5] w-28 shrink-0 object-cover object-top"
                   />
                 ) : (
                   /* TODO(client): approved photograph → /public/people/… then
                      set `why.authority.photo` in /src/content/home.ts */
-                  <div className="grid aspect-[4/5] w-24 shrink-0 place-items-center border-2 border-dashed border-ink/25">
+                  <div className="grid aspect-[4/5] w-28 shrink-0 place-items-center border-2 border-dashed border-ink/25">
                     <PetalMark className="h-7 w-7 text-orange/50" strokeWidth={2.4} />
                   </div>
                 )}
