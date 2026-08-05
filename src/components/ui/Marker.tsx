@@ -25,17 +25,20 @@ export default function Marker({
   className = '',
   tone = 'amber',
   delay = 0.2,
+  block = false,
 }: {
   children: React.ReactNode;
   className?: string;
   tone?: keyof typeof tones;
   delay?: number;
+  /** Fill the whole word instead of underlining it — required on dark backgrounds. */
+  block?: boolean;
 }) {
   const reduced = useReducedMotionPref();
 
   return (
     <motion.span
-      className={`marker ${tones[tone]} ${className}`}
+      className={`marker ${tones[tone]} ${block ? 'marker--block' : ''} ${className}`}
       initial={reduced ? { '--marker-scale': 1 } : ({ '--marker-scale': 0 } as never)}
       whileInView={{ '--marker-scale': 1 } as never}
       viewport={{ once: true, amount: 0.6 }}

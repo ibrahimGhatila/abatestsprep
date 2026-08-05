@@ -5,7 +5,10 @@
 @layer base {
   :root {
     --shell-gutter: clamp(1.25rem, 0.5rem + 3vw, 4.5rem);
-    --nav-h: 4.75rem;
+    /* Height reserved for the floating nav: its 64px pill plus the 20px it
+       is inset from the top edge. Inner pages pad by this so their headers
+       clear it. */
+    --nav-h: 5.5rem;
   }
 
   html {
@@ -102,6 +105,23 @@
     /* Slightly off-square so it reads as a marker stroke, not a table cell. */
     clip-path: polygon(0 10%, 100% 0, 100% 90%, 0.5% 100%);
   }
+  /**
+   * Block variant: the bar covers the whole word rather than underlining it.
+   *
+   * Required whenever the marked word sits on a dark background. The default
+   * bar only covers the bottom ~0.4em, which is fine when the text colour
+   * reads against the page behind it — but over the hero photograph the ink
+   * text above the bar simply disappears. Here the word always sits on amber.
+   */
+  .marker--block::before {
+    top: -0.04em;
+    bottom: -0.02em;
+    left: -0.12em;
+    right: -0.12em;
+    height: auto;
+    clip-path: polygon(0 4%, 100% 0, 100% 96%, 0.4% 100%);
+  }
+
   /* On an orange block, amber vanishes — go cream instead. */
   .marker--cream::before {
     background: theme('colors.cream');

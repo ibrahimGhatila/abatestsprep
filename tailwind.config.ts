@@ -41,6 +41,13 @@ const config: Config = {
         'display-md': ['clamp(1.9rem, 1rem + 3.8vw, 3.5rem)', { lineHeight: '0.98', letterSpacing: '-0.03em' }],
         'display-lg': ['clamp(2.25rem, 0.9rem + 5.2vw, 5rem)', { lineHeight: '0.95', letterSpacing: '-0.03em' }],
         'display-xl': ['clamp(2.75rem, 0.8rem + 6.6vw, 6.5rem)', { lineHeight: '0.95', letterSpacing: '-0.03em' }],
+        /**
+         * Hero headline. The `min(vw, vh)` term is the whole trick: the size
+         * tracks whichever viewport dimension is scarcer, so the hero always
+         * resolves inside one screen — on a short laptop the type shrinks
+         * instead of pushing the CTAs below the fold.
+         */
+        hero: ['clamp(2.25rem, min(6.4vw, 8.4vh), 5.5rem)', { lineHeight: '0.95', letterSpacing: '-0.03em' }],
         // The colour-block step numerals and pricing figure.
         numeral: ['clamp(4rem, 2rem + 12vw, 14rem)', { lineHeight: '0.8', letterSpacing: '-0.05em' }],
       },
