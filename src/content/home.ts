@@ -139,7 +139,6 @@ export const pricing = {
     name: 'Free level analysis',
     price: 'Free',
     priceNote: 'No card, no obligation',
-    summary: 'A real diagnostic under exam conditions, then an honest read on your level and your reachable target.',
     includes: [
       'A full diagnostic in your exam, under real timing',
       'Your current level, and the specific gaps behind it',
@@ -153,10 +152,11 @@ export const pricing = {
     name: 'Premium Prep',
     price: '$5,000',
     priceNote: 'Full-service programme',
-    summary: 'The complete programme: your plan, your tutor, your mocks, and support all the way through to submission.',
-    // TODO(client): confirm every line below, plus what the $5,000 covers in
-    // terms of duration, session count and exam scope. Nothing here should be
-    // published until the client has signed it off.
+    // TODO(client): the on-page TODO badge was removed at the client's
+    // request, but these inclusions are still unconfirmed and are a
+    // contractual claim. Confirm every line below, plus what the $5,000
+    // covers in terms of programme duration, session count, exam scope and
+    // refund terms, before this goes live.
     includes: [
       'Full diagnostic plus an honest reachability read',
       'A personal plan built around your weak spots',
@@ -166,7 +166,6 @@ export const pricing = {
       'Direct access to your tutor between sessions',
     ],
     cta: { label: 'Talk to us about Premium', href: '/contact' },
-    todo: 'Confirm programme duration, session count, exam scope and refund terms before publishing this panel.',
   },
 } as const;
 
