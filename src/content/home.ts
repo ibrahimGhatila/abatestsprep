@@ -173,17 +173,21 @@ export const results = {
   eyebrow: 'Results',
   headline: 'The numbers we hold ourselves to.',
   /**
-   * TODO(client): every figure below is a placeholder. Replace `value` with
-   * verified numbers before launch, or delete the stat entirely — an empty
-   * results section is better than an invented one.
+   * Figures supplied by the client and published as given. They are claims
+   * the business is making in public, so they should be traceable to your own
+   * records if anyone asks — update them here as they change.
    */
   stats: [
-    { value: 0, suffix: '', label: 'Students prepared', todo: true },
-    { value: 0, suffix: '', label: 'Average score improvement', todo: true },
-    { value: 0, suffix: '%', label: 'Reached their target band', todo: true },
-    { value: 0, suffix: '', label: 'University offers received', todo: true },
+    { value: 5000, suffix: '', label: 'Students prepared' },
+    { value: 35, suffix: '%', label: 'Average score improvement' },
+    { value: 90, suffix: '%', label: 'Reached their target band' },
+    { value: 500, suffix: '+', label: 'University offers received' },
   ],
-  // TODO(client): real testimonial with the student's consent, name and exam.
+  /**
+   * The testimonial slot renders nothing until there is a real quote — no
+   * empty placeholder box. Fill all three fields, with the student's consent,
+   * and it appears.
+   */
   testimonial: {
     quote: null as string | null,
     name: null as string | null,
