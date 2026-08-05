@@ -21,7 +21,7 @@ export default function Method() {
       <div className="bg-cream pb-[clamp(2.5rem,5vw,4.5rem)] pt-section">
         <div className="shell">
           <div className="grid-12 items-end gap-y-7">
-            <div className="col-span-4 md:col-span-7">
+            <div className="col-span-4 md:col-span-9">
               <Reveal>
                 <Eyebrow tone="orange" className="mb-7">
                   {method.eyebrow}
@@ -33,9 +33,6 @@ export default function Method() {
                 </h2>
               </Reveal>
             </div>
-            <Reveal className="col-span-4 md:col-span-4 md:col-start-9" delay={0.1}>
-              <p className="max-w-measure text-lg leading-[1.6] text-ink/65">{method.sub}</p>
-            </Reveal>
           </div>
         </div>
       </div>
@@ -45,14 +42,9 @@ export default function Method() {
       <div className="bg-cream py-[clamp(3rem,6vw,5rem)]">
         <div className="shell">
           <Reveal>
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-measure text-lg font-semibold leading-[1.4] text-ink">
-                Step 01 costs nothing. Start there.
-              </p>
-              <Button href={cta.primary.href} size="lg">
-                {method.ctaLabel}
-              </Button>
-            </div>
+            <Button href={cta.primary.href} size="lg">
+              {method.ctaLabel}
+            </Button>
           </Reveal>
         </div>
       </div>

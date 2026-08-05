@@ -36,7 +36,7 @@ export const exams: Exam[] = [
     name: 'DSAT',
     fullName: 'Digital SAT',
     index: '01',
-    hook: 'Adaptive, scored to 1600. Section two changes based on how you handled section one.',
+    hook: 'For US and global universities. Adaptive, scored to 1600.',
     purpose: 'Undergraduate admission to US and global universities.',
     audience: 'High-school students applying abroad for a bachelor’s degree.',
     intro:
@@ -70,7 +70,7 @@ export const exams: Exam[] = [
     // deliberately generic rather than a guess at the acronym.
     fullName: 'Alternative admissions pathway',
     index: '02',
-    hook: 'An alternative admissions route for students it fits better than a test-only application.',
+    hook: 'An alternative admissions route, for the students it suits.',
     purpose: 'An alternative admissions pathway to placement abroad.',
     audience: 'Students whose strongest case is not made by a single test score.',
     intro:
@@ -98,7 +98,7 @@ export const exams: Exam[] = [
     name: 'IELTS',
     fullName: 'International English Language Testing System',
     index: '03',
-    hook: 'The most widely accepted English test — the UK, Europe and beyond.',
+    hook: 'The most widely accepted English test worldwide.',
     purpose: 'English proficiency for universities, visas and immigration worldwide.',
     audience: 'Anyone who needs a band score on record — undergraduate, postgraduate or professional.',
     intro:
@@ -130,7 +130,7 @@ export const exams: Exam[] = [
     name: 'TOEFL iBT',
     fullName: 'Test of English as a Foreign Language',
     index: '04',
-    hook: 'Academic English, integrated tasks — most common for North American universities.',
+    hook: 'Academic English, favoured by North American universities.',
     purpose: 'English proficiency, most commonly for North American universities.',
     audience: 'Students applying where TOEFL is preferred, or who read and write more comfortably than they speak.',
     intro:
@@ -159,7 +159,7 @@ export const exams: Exam[] = [
     name: 'PTE',
     fullName: 'Pearson Test of English',
     index: '05',
-    hook: 'Fast, computer-scored, and increasingly accepted across the UK and Australia.',
+    hook: 'Fast, computer-scored, growing UK and Australia acceptance.',
     purpose: 'English proficiency for UK and Australian universities and visas.',
     audience: 'Students who want a quick turnaround and are comfortable being marked by a machine.',
     intro:
@@ -188,7 +188,7 @@ export const exams: Exam[] = [
     name: 'YDS',
     fullName: 'Yabancı Dil Bilgisi Seviye Tespit Sınavı',
     index: '06',
-    hook: 'Turkey’s academic English exam: grammar-dense, vocabulary-hungry, deeply learnable.',
+    hook: 'Turkey’s academic English exam. Grammar-dense, learnable.',
     purpose: 'Academic and professional English certification in Turkey.',
     audience: 'Students and professionals who need a Turkish-recognised English score.',
     intro:

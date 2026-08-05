@@ -49,7 +49,7 @@ export default function Results() {
 
           <Reveal className="col-span-4 md:col-span-4 md:col-start-9" delay={0.1}>
             <p className="max-w-measure text-[0.95rem] leading-[1.55] text-ink/65">
-              Where you land depends on where you start. The diagnostic is how we find out.
+              Where you land depends on where you start.
             </p>
             <Button href={cta.primary.href} variant="ghost" className="mt-6">
               {cta.primary.label}

@@ -53,14 +53,9 @@ export default function Exams() {
 
       <div className="shell relative pt-14">
         <Reveal>
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-measure text-cream/60">
-              Not sure which one your university list actually requires? That is the first thing we work out.
-            </p>
-            <Button href={cta.primary.href} size="lg">
-              {cta.primary.label}
-            </Button>
-          </div>
+          <Button href={cta.primary.href} size="lg">
+            {cta.primary.label}
+          </Button>
         </Reveal>
       </div>
     </section>

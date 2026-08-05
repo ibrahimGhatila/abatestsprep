@@ -8,8 +8,8 @@ import PetalWatermark from '@/components/ui/PetalWatermark';
 export type Step = {
   index: string;
   title: string;
-  lead: string;
-  body: string;
+  /** One line. There is no paragraph on this panel by design. */
+  line: string;
 };
 
 /**
@@ -124,9 +124,8 @@ export default function StepPin({ steps }: { steps: readonly Step[] }) {
                 <span className={`block text-[5rem] font-black leading-[0.8] tracking-[-0.05em] ${p.numeral}`}>
                   {step.index}
                 </span>
-                <p className={`mt-6 text-eyebrow font-semibold uppercase ${p.dim}`}>{step.lead}</p>
-                <h3 className={`mt-3 text-display-md font-extrabold ${p.text}`}>{step.title}</h3>
-                <p className={`mt-5 max-w-prose text-[1.0625rem] leading-[1.6] ${p.dim}`}>{step.body}</p>
+                <h3 className={`mt-5 text-display-md font-extrabold ${p.text}`}>{step.title}</h3>
+                <p className={`mt-4 max-w-prose text-lg leading-snug ${p.dim}`}>{step.line}</p>
               </div>
             </li>
           );
@@ -172,9 +171,10 @@ export default function StepPin({ steps }: { steps: readonly Step[] }) {
                     isActive ? 'relative opacity-100' : 'pointer-events-none absolute inset-0 translate-y-3 opacity-0'
                   }`}
                 >
-                  <p className={`text-eyebrow font-semibold uppercase ${p.dim}`}>{step.lead}</p>
-                  <h3 className={`mt-5 text-display-lg font-black ${p.text}`}>{step.title}</h3>
-                  <p className={`mt-7 max-w-prose text-lg leading-[1.6] ${p.dim}`}>{step.body}</p>
+                  <h3 className={`text-display-lg font-black ${p.text}`}>{step.title}</h3>
+                  <p className={`mt-6 max-w-prose text-[clamp(1.05rem,1.6vw,1.4rem)] leading-snug ${p.dim}`}>
+                    {step.line}
+                  </p>
                 </div>
               );
             })}

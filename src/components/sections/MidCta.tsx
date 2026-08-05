@@ -46,10 +46,6 @@ export default function MidCta() {
                 </Reveal>
 
                 <Reveal delay={0.1}>
-                  <p className="mt-8 max-w-prose text-lg leading-[1.6] text-cream/80">{midCta.sub}</p>
-                </Reveal>
-
-                <Reveal delay={0.14}>
                   <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                     <Button href={cta.primary.href} size="lg">
                       {cta.primary.label}

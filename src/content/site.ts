@@ -21,14 +21,13 @@ export const nav = [
 ] as const;
 
 export const contact = {
-  instagramHandle: '@abatestsprep',
-  instagramUrl: 'https://instagram.com/abatestsprep',
-  // TODO(client): confirm these three social handles — the Instagram handle is
-  // the only one that was supplied. The others are best guesses at the URL
-  // shape and MUST be checked before launch.
-  tiktokUrl: 'https://www.tiktok.com/@abatestsprep',
-  linkedinUrl: 'https://www.linkedin.com/company/abatestsprep',
-  threadsUrl: 'https://www.threads.net/@abatestsprep',
+  // Handles supplied by the client. Note the Instagram and TikTok handles
+  // differ ("tests" vs "test") — that is intentional, not a typo here.
+  instagramHandle: '@aba.tests.prep',
+  instagramUrl: 'https://www.instagram.com/aba.tests.prep',
+  tiktokHandle: '@aba.test.prep',
+  tiktokUrl: 'https://www.tiktok.com/@aba.test.prep',
+  linkedinUrl: 'https://linkedin.com/company/97844527',
   // TODO(client): confirm the public contact address before launch.
   email: 'hello@abatestsprep.com',
   // TODO(client): real WhatsApp business number in E.164, no spaces.
@@ -82,11 +81,14 @@ export const banners = {
 
 export type BannerKey = keyof typeof banners;
 
+/**
+ * Threads was dropped: no URL was supplied for it, and a guessed link is worse
+ * than one fewer icon. Add it back here with a real URL if the account exists.
+ */
 export const socials = [
   { label: 'Instagram', handle: contact.instagramHandle, href: contact.instagramUrl, icon: 'instagram' },
-  { label: 'TikTok', handle: contact.instagramHandle, href: contact.tiktokUrl, icon: 'tiktok' },
+  { label: 'TikTok', handle: contact.tiktokHandle, href: contact.tiktokUrl, icon: 'tiktok' },
   { label: 'LinkedIn', handle: 'ABA Tests Prep', href: contact.linkedinUrl, icon: 'linkedin' },
-  { label: 'Threads', handle: contact.instagramHandle, href: contact.threadsUrl, icon: 'threads' },
 ] as const;
 
 export const legalNav = [

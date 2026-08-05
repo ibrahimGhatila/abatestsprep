@@ -26,9 +26,6 @@ export default function FinalCta() {
             <Reveal delay={0.05}>
               <h2 className="text-display-lg font-black text-white text-balance">{finalCta.headline}</h2>
             </Reveal>
-            <Reveal delay={0.1}>
-              <p className="mt-7 max-w-prose text-lg leading-[1.6] text-white/85">{finalCta.sub}</p>
-            </Reveal>
           </div>
 
           <Reveal className="col-span-4 md:col-span-4 md:col-start-9 md:justify-self-end" delay={0.14}>

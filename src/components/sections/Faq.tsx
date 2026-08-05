@@ -29,11 +29,6 @@ export default function Faq() {
                 <h2 className="text-display-md font-black text-ink">{faq.headline}</h2>
               </Reveal>
               <Reveal delay={0.1}>
-                <p className="mt-7 max-w-measure leading-[1.6] text-ink/65">
-                  Anything still unclear is worth a five-minute conversation rather than a form.
-                </p>
-              </Reveal>
-              <Reveal delay={0.14}>
                 <Button href={cta.primary.href} className="mt-8">
                   {cta.primary.label}
                 </Button>
