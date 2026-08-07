@@ -2,8 +2,8 @@ import StepPin from '@/components/StepPin';
 import Button from '@/components/ui/Button';
 import Eyebrow from '@/components/ui/Eyebrow';
 import { Reveal } from '@/components/ui/Reveal';
-import { cta } from '@/content/site';
-import { method } from '@/content/home';
+import { routes } from '@/content/site';
+import { href, type Dictionary, type Locale } from '@/content/i18n';
 
 /**
  * Method.
@@ -15,7 +15,8 @@ import { method } from '@/content/home';
  * The CTA comes immediately after the sequence, while "01 Diagnose — a free
  * level analysis" is still the last thing read.
  */
-export default function Method() {
+export default function Method({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const method = dict.method;
   return (
     <section id="method" aria-labelledby="method-heading" className="relative">
       <div className="bg-cream pb-[clamp(2.5rem,5vw,4.5rem)] pt-section">
@@ -42,7 +43,7 @@ export default function Method() {
       <div className="bg-cream py-[clamp(3rem,6vw,5rem)]">
         <div className="shell">
           <Reveal>
-            <Button href={cta.primary.href} size="lg">
+            <Button href={href(locale, routes.contact)} size="lg">
               {method.ctaLabel}
             </Button>
           </Reveal>

@@ -4,8 +4,8 @@ import Eyebrow from '@/components/ui/Eyebrow';
 import Marker from '@/components/ui/Marker';
 import { Reveal, RevealItem, RevealList } from '@/components/ui/Reveal';
 import { PetalMark } from '@/components/Logo';
-import { cta } from '@/content/site';
-import { why } from '@/content/home';
+import { authority, routes } from '@/content/site';
+import { href, type Dictionary, type Locale } from '@/content/i18n';
 
 /**
  * Why ABA — on sand.
@@ -18,7 +18,8 @@ import { why } from '@/content/home';
  * 6–12 as a flush hairline-separated list — not three matching cards in a row,
  * so it cannot be confused with the pricing panels or the exam rows.
  */
-export default function WhyAba() {
+export default function WhyAba({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const why = dict.why;
   return (
     <section
       id="why"
@@ -36,7 +37,9 @@ export default function WhyAba() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="text-display-md font-black text-ink">
-                Evidence, not <Marker delay={0.3}>enthusiasm.</Marker>
+                {why.before}
+                <Marker delay={0.3}>{why.mark}</Marker>
+                {why.after}
               </h2>
             </Reveal>
             </div>
@@ -47,14 +50,14 @@ export default function WhyAba() {
                 half the section's height for no information. */}
             <Reveal delay={0.1} className="mt-10 lg:mt-12">
               <figure className="flex max-w-md items-stretch overflow-hidden border-2 border-ink/10 bg-cream">
-                {why.authority.photo ? (
+                {authority.photo ? (
                   /* Flush to the card edge, not floating inside padding — that
                      gap was what made it read as pasted in. `object-top`
                      because portraits crop from the bottom, not through the
                      face. 2x for retina; `unoptimized` fetches from source. */
                   <Image
-                    src={why.authority.photo}
-                    alt={why.authority.name}
+                    src={authority.photo}
+                    alt={authority.name}
                     width={320}
                     height={400}
                     unoptimized
@@ -69,21 +72,21 @@ export default function WhyAba() {
                 )}
 
                 <figcaption className="flex flex-1 flex-col justify-center p-5 sm:p-6">
-                  <p className="text-eyebrow font-semibold uppercase text-ember">{why.authority.role}</p>
+                  <p className="text-eyebrow font-semibold uppercase text-ember">{why.authorityRole}</p>
                   <p className="mt-2.5 text-[1.35rem] font-black leading-[1.05] tracking-[-0.03em] text-ink">
-                    {why.authority.name}
+                    {authority.name}
                   </p>
                   {/* One line, like every other supporting line on the page. */}
                   <p className="mt-3 border-t-2 border-ink/10 pt-3 text-[0.85rem] leading-snug text-ink/60">
-                    Academic oversight of our method.
+                    {why.authorityNote}
                   </p>
                 </figcaption>
               </figure>
             </Reveal>
 
             <Reveal delay={0.14}>
-              <Button href={cta.primary.href} variant="ghost" className="mt-7">
-                {cta.primary.label}
+              <Button href={href(locale, routes.contact)} variant="ghost" className="mt-7">
+                {dict.cta.primary}
               </Button>
             </Reveal>
             </div>

@@ -3,7 +3,8 @@ import Eyebrow from '@/components/ui/Eyebrow';
 import PetalWatermark from '@/components/ui/PetalWatermark';
 import { PetalMark } from '@/components/Logo';
 import { Reveal, RevealItem, RevealList } from '@/components/ui/Reveal';
-import { pricing } from '@/content/home';
+import { pricingFigures, routes } from '@/content/site';
+import { href, type Dictionary, type Locale } from '@/content/i18n';
 
 /**
  * Pricing — on charcoal, in one screen.
@@ -21,7 +22,8 @@ import { pricing } from '@/content/home';
  *  - The restating summary line under each price came out. The inclusion list
  *    directly beneath it said the same thing with specifics.
  */
-export default function Pricing() {
+export default function Pricing({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const pricing = dict.pricing;
   return (
     <section
       id="pricing"
@@ -75,8 +77,8 @@ export default function Pricing() {
                 </ul>
               </div>
 
-              <Button href={pricing.free.cta.href} className="mt-6 w-full self-start sm:w-auto">
-                {pricing.free.cta.label}
+              <Button href={href(locale, routes.contact)} className="mt-6 w-full self-start sm:w-auto">
+                {pricing.free.cta}
               </Button>
             </div>
           </Reveal>
@@ -93,7 +95,7 @@ export default function Pricing() {
                 </h3>
 
                 <p className="mt-4 text-[clamp(2.75rem,min(6vw,9vh),5rem)] font-black leading-[0.85] tracking-[-0.045em] text-white">
-                  {pricing.premium.price}
+                  {pricingFigures.premium}
                 </p>
                 <p className="mt-2 text-eyebrow font-semibold uppercase text-white/75">{pricing.premium.priceNote}</p>
 
@@ -114,11 +116,11 @@ export default function Pricing() {
               <div className="relative mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                 {/* The free step stays the primary action even inside the
                     premium panel — nobody should buy before the diagnostic. */}
-                <Button href={pricing.free.cta.href} variant="onOrange">
-                  {pricing.free.cta.label}
+                <Button href={href(locale, routes.contact)} variant="onOrange">
+                  {pricing.free.cta}
                 </Button>
-                <Button href={pricing.premium.cta.href} variant="invert">
-                  {pricing.premium.cta.label}
+                <Button href={href(locale, routes.contact)} variant="invert">
+                  {pricing.premium.cta}
                 </Button>
               </div>
             </div>

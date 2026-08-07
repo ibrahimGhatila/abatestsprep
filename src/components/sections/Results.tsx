@@ -4,8 +4,8 @@ import Button from '@/components/ui/Button';
 import CountUp from '@/components/ui/CountUp';
 import Eyebrow from '@/components/ui/Eyebrow';
 import { Reveal, RevealItem, RevealList } from '@/components/ui/Reveal';
-import { cta } from '@/content/site';
-import { results } from '@/content/home';
+import { routes, stats, testimonial } from '@/content/site';
+import { href, type Dictionary, type Locale } from '@/content/i18n';
 
 /**
  * Results — on cream.
@@ -23,8 +23,9 @@ import { results } from '@/content/home';
  * empty dashed placeholder was taking a third of the section and telling a
  * visitor nothing.
  */
-export default function Results() {
-  const { quote, name, detail } = results.testimonial;
+export default function Results({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const results = dict.results;
+  const { quote, name, detail } = testimonial;
   const hasTestimonial = Boolean(quote);
 
   return (
@@ -48,11 +49,9 @@ export default function Results() {
           </div>
 
           <Reveal className="col-span-4 md:col-span-4 md:col-start-9" delay={0.1}>
-            <p className="max-w-measure text-[0.95rem] leading-[1.55] text-ink/65">
-              Where you land depends on where you start.
-            </p>
-            <Button href={cta.primary.href} variant="ghost" className="mt-6">
-              {cta.primary.label}
+            <p className="max-w-measure text-[0.95rem] leading-[1.55] text-ink/65">{results.line}</p>
+            <Button href={href(locale, routes.contact)} variant="ghost" className="mt-6">
+              {dict.cta.primary}
             </Button>
           </Reveal>
         </div>
@@ -80,13 +79,13 @@ export default function Results() {
       {/* The figures, on the bottom edge at display scale. */}
       <div className="shell mt-14 w-full lg:mt-16">
         <RevealList as="dl" stagger={0.07} className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
-          {results.stats.map((stat) => (
-            <RevealItem key={stat.label} className="border-t-2 border-ink pt-5">
+          {stats.map((stat) => (
+            <RevealItem key={stat.key} className="border-t-2 border-ink pt-5">
               <dd className="text-[clamp(2.5rem,min(6vw,9vh),5rem)] font-black leading-[0.85] tracking-[-0.04em] text-ink">
                 <CountUp value={stat.value} suffix={stat.suffix} />
               </dd>
               <dt className="mt-4 max-w-[18ch] text-eyebrow font-semibold uppercase leading-relaxed text-ink/60">
-                {stat.label}
+                {results.stats[stat.key]}
               </dt>
             </RevealItem>
           ))}

@@ -2,15 +2,16 @@ import Button from '@/components/ui/Button';
 import Eyebrow from '@/components/ui/Eyebrow';
 import PetalWatermark from '@/components/ui/PetalWatermark';
 import { Reveal } from '@/components/ui/Reveal';
-import { cta } from '@/content/site';
-import { finalCta } from '@/content/home';
+import { routes } from '@/content/site';
+import { href, type Dictionary, type Locale } from '@/content/i18n';
 
 /**
  * The last thing before the footer: a full orange block, one headline, one
  * button. No competing links, no secondary copy — the only remaining decision
  * on the page is whether to book.
  */
-export default function FinalCta() {
+export default function FinalCta({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const finalCta = dict.finalCta;
   return (
     <section className="on-orange relative overflow-hidden bg-orange py-[clamp(4rem,9vw,8rem)]">
       <PetalWatermark tone="cream" size="clamp(22rem,42vw,38rem)" className="-bottom-32 -left-24" />
@@ -29,8 +30,8 @@ export default function FinalCta() {
           </div>
 
           <Reveal className="col-span-4 md:col-span-4 md:col-start-9 md:justify-self-end" delay={0.14}>
-            <Button href={cta.primary.href} variant="onOrange" size="lg">
-              {cta.primary.label}
+            <Button href={href(locale, routes.contact)} variant="onOrange" size="lg">
+              {dict.cta.primary}
             </Button>
           </Reveal>
         </div>

@@ -1,24 +1,31 @@
 import type { MetadataRoute } from 'next';
-import { site } from '@/content/site';
-import { exams } from '@/content/exams';
+import { examOrder, routes, site } from '@/content/site';
+import { locales } from '@/content/i18n';
 
 /**
- * `/results` and `/blog` are deliberately excluded — both are noindex until
- * they carry verified content. Re-add them here when they do.
+ * One entry per page per language, each carrying `alternates.languages` so
+ * search engines pair the two trees rather than treating them as duplicates.
+ *
+ * `/results` and `/blog` are excluded — both are noindex until they carry
+ * verified content. `/login` and the legal stubs are excluded for the same
+ * reason.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ['', '/exams', '/method', '/about', '/contact'];
+const paths = [routes.home, routes.exams, routes.method, routes.about, routes.contact];
 
-  return [
-    ...staticRoutes.map((path) => ({
-      url: `${site.url}${path}`,
-      changeFrequency: 'monthly' as const,
-      priority: path === '' ? 1 : 0.7,
-    })),
-    ...exams.map((exam) => ({
-      url: `${site.url}/exams/${exam.slug}`,
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    })),
-  ];
+export default function sitemap(): MetadataRoute.Sitemap {
+  const all = [...paths, ...examOrder.map((slug) => `${routes.exams}/${slug}`)];
+
+  return locales.flatMap((locale) =>
+    all.map((path) => {
+      const suffix = path === '/' ? '' : path;
+      return {
+        url: `${site.url}/${locale}${suffix}`,
+        changeFrequency: 'monthly' as const,
+        priority: path === '/' ? 1 : 0.7,
+        alternates: {
+          languages: Object.fromEntries(locales.map((l) => [l, `${site.url}/${l}${suffix}`])),
+        },
+      };
+    }),
+  );
 }

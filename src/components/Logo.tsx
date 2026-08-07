@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { href, type Locale } from '@/content/i18n';
 
 /**
  * ABA Tests Prep logo, drawn as inline SVG so it stays crisp, recolourable
@@ -43,9 +44,13 @@ type LogoProps = {
   tone?: 'light' | 'dark';
   className?: string;
   asLink?: boolean;
+  /** Omit to render without a link (footer wordmark, decorative uses). */
+  locale?: Locale;
+  /** Accessible name, from the dictionary. */
+  label?: string;
 };
 
-export default function Logo({ variant = 'full', tone = 'light', className = '', asLink = true }: LogoProps) {
+export default function Logo({ variant = 'full', tone = 'light', className = '', asLink = true, locale, label }: LogoProps) {
   const wordTone = tone === 'dark' ? 'text-cream' : 'text-ink';
   const subTone = tone === 'dark' ? 'text-cream/65' : 'text-ink/60';
   // On dark blocks the tile inverts: cream tile, orange mark reads better
@@ -68,10 +73,10 @@ export default function Logo({ variant = 'full', tone = 'light', className = '',
     </span>
   );
 
-  if (!asLink) return inner;
+  if (!asLink || !locale) return inner;
 
   return (
-    <Link href="/" aria-label="ABA Tests Prep — home" data-cursor="link" className="inline-flex">
+    <Link href={href(locale, '/')} aria-label={label} data-cursor="link" className="inline-flex">
       {inner}
     </Link>
   );

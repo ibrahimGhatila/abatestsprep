@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 import SocialIcon, { type SocialIconName } from '@/components/ui/SocialIcon';
-import { contact, cta, legalNav, nav, site, socials } from '@/content/site';
-import { exams } from '@/content/exams';
+import { contact, examOrder, legalItems, navItems, routes, site, socials } from '@/content/site';
+import { href, type Dictionary, type Locale } from '@/content/i18n';
 
 /**
  * Charcoal footer, on the same 12-col grid as the rest of the page.
@@ -20,20 +20,18 @@ import { exams } from '@/content/exams';
  * edge, not a centred logo. It is deliberately restrained: at display scale it
  * stopped reading as a watermark and started reading as a wall.
  */
-export default function Footer() {
+export default function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
     <footer className="on-dark relative overflow-hidden bg-charcoal text-cream">
       <div className="shell relative pb-8 pt-[clamp(3rem,5vw,4.5rem)]">
         <div className="grid-12 gap-y-12">
           {/* Brand */}
           <div className="col-span-4 md:col-span-4">
-            <Logo tone="dark" />
+            <Logo locale={locale} label={dict.common.homeAria} tone="dark" />
             <p className="mt-6 max-w-[20ch] text-xl font-extrabold leading-[1.15] tracking-[-0.02em] text-cream">
-              {site.positioning}
+              {dict.site.positioning}
             </p>
-            <p className="mt-4 max-w-measure text-sm leading-[1.6] text-cream/55">
-              Exam preparation for students heading to global universities.
-            </p>
+            <p className="mt-4 max-w-measure text-sm leading-[1.6] text-cream/55">{dict.site.tagline}</p>
 
             <ul className="mt-7 space-y-2.5">
               <li>
@@ -48,47 +46,47 @@ export default function Footer() {
           </div>
 
           {/* Four two-column stacks fill 5–12 exactly. */}
-          <nav aria-label="Explore" className="col-span-2 md:col-span-2 md:col-start-5">
-            <FooterHeading>Explore</FooterHeading>
+          <nav aria-label={dict.footer.explore} className="col-span-2 md:col-span-2 md:col-start-5">
+            <FooterHeading>{dict.footer.explore}</FooterHeading>
             <ul className="mt-5 space-y-2.5">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <FooterLink href={item.href}>{item.label}</FooterLink>
+              {navItems.map((item) => (
+                <li key={item.key}>
+                  <FooterLink href={href(locale, item.href)}>{dict.nav[item.key]}</FooterLink>
                 </li>
               ))}
               <li>
-                <FooterLink href="/contact">Contact</FooterLink>
+                <FooterLink href={href(locale, routes.contact)}>{dict.footer.contact}</FooterLink>
               </li>
               <li>
-                <FooterLink href={cta.login.href}>{cta.login.label}</FooterLink>
+                <FooterLink href={href(locale, routes.login)}>{dict.cta.login}</FooterLink>
               </li>
             </ul>
           </nav>
 
           <div className="col-span-2 md:col-span-2">
-            <FooterHeading>Exams</FooterHeading>
+            <FooterHeading>{dict.footer.exams}</FooterHeading>
             <ul className="mt-5 space-y-2.5">
-              {exams.map((exam) => (
-                <li key={exam.slug}>
-                  <FooterLink href={`/exams/${exam.slug}`}>{exam.name}</FooterLink>
+              {examOrder.map((slug) => (
+                <li key={slug}>
+                  <FooterLink href={href(locale, `${routes.exams}/${slug}`)}>{dict.exams[slug].name}</FooterLink>
                 </li>
               ))}
             </ul>
           </div>
 
           <div className="col-span-2 md:col-span-2">
-            <FooterHeading>Legal</FooterHeading>
+            <FooterHeading>{dict.footer.legal}</FooterHeading>
             <ul className="mt-5 space-y-2.5">
-              {legalNav.map((item) => (
-                <li key={item.href}>
-                  <FooterLink href={item.href}>{item.label}</FooterLink>
+              {legalItems.map((item) => (
+                <li key={item.key}>
+                  <FooterLink href={href(locale, item.href)}>{dict.footer.legalLabels[item.key]}</FooterLink>
                 </li>
               ))}
             </ul>
           </div>
 
           <div className="col-span-2 md:col-span-2">
-            <FooterHeading>Follow</FooterHeading>
+            <FooterHeading>{dict.footer.follow}</FooterHeading>
             <ul className="mt-5 space-y-2.5">
               {socials.map((social) => (
                 <li key={social.label}>
@@ -121,7 +119,7 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col gap-3 border-t-2 border-cream/10 pt-6 text-xs text-cream/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
+            © {new Date().getFullYear()} {site.name}. {dict.site.rights}
           </p>
           <p className="font-semibold uppercase tracking-[0.12em]">{site.domain}</p>
         </div>

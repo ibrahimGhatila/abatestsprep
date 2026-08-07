@@ -3,8 +3,8 @@ import Button from '@/components/ui/Button';
 import Eyebrow from '@/components/ui/Eyebrow';
 import Marker from '@/components/ui/Marker';
 import { Reveal } from '@/components/ui/Reveal';
-import { cta, whatsappUrl } from '@/content/site';
-import { midCta } from '@/content/home';
+import { routes, whatsappUrl } from '@/content/site';
+import { href, type Dictionary, type Locale } from '@/content/i18n';
 
 /**
  * Mid-page CTA on the full-bleed COMMUNITY banner.
@@ -15,11 +15,13 @@ import { midCta } from '@/content/home';
  * The scrim is a hard-edged left-to-right wash rather than a soft gradient:
  * copy sits in the dense left half, the photograph stays visible on the right.
  */
-export default function MidCta() {
+export default function MidCta({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const midCta = dict.midCta;
   return (
     <section id="free-analysis" className="on-dark relative isolate">
       <Banner
         name="community"
+        alt={dict.banners.community}
         ratio="16/9"
         scrim="edge-dark"
         sizes="100vw"
@@ -47,12 +49,12 @@ export default function MidCta() {
 
                 <Reveal delay={0.1}>
                   <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                    <Button href={cta.primary.href} size="lg">
-                      {cta.primary.label}
+                    <Button href={href(locale, routes.contact)} size="lg">
+                      {dict.cta.primary}
                     </Button>
                     {/* TODO(client): confirm the WhatsApp number in /src/content/site.ts */}
                     <Button href={whatsappUrl} external variant="invert" size="lg">
-                      Message us on WhatsApp
+                      {dict.cta.whatsapp}
                     </Button>
                   </div>
                 </Reveal>

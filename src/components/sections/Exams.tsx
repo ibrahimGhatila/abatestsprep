@@ -3,9 +3,8 @@ import Button from '@/components/ui/Button';
 import Eyebrow from '@/components/ui/Eyebrow';
 import PetalWatermark from '@/components/ui/PetalWatermark';
 import { Reveal } from '@/components/ui/Reveal';
-import { cta } from '@/content/site';
-import { exams } from '@/content/exams';
-import { examsSection } from '@/content/home';
+import { examOrder, routes } from '@/content/site';
+import { href, type Dictionary, type Locale } from '@/content/i18n';
 
 /**
  * Exams — a full-width interactive list on charcoal.
@@ -18,7 +17,8 @@ import { examsSection } from '@/content/home';
  * It also scales honestly to six entries, where a card row would have wrapped
  * into a lopsided 3+3 grid.
  */
-export default function Exams() {
+export default function Exams({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const examsSection = dict.examsSection;
   return (
     <section id="exams" className="on-dark relative overflow-hidden bg-charcoal py-section">
       <PetalWatermark tone="orange" size="clamp(24rem,44vw,40rem)" className="-left-40 -top-24" />
@@ -45,16 +45,24 @@ export default function Exams() {
           hover colour flip covers the full viewport width. */}
       <Reveal>
         <ul>
-          {exams.map((exam) => (
-            <ExamRow key={exam.slug} exam={exam} />
+          {examOrder.map((slug, i) => (
+            <ExamRow
+              key={slug}
+              locale={locale}
+              slug={slug}
+              index={String(i + 1).padStart(2, '0')}
+              name={dict.exams[slug].name}
+              hook={dict.exams[slug].hook}
+              prepLabel={dict.common.prep}
+            />
           ))}
         </ul>
       </Reveal>
 
       <div className="shell relative pt-14">
         <Reveal>
-          <Button href={cta.primary.href} size="lg">
-            {cta.primary.label}
+          <Button href={href(locale, routes.contact)} size="lg">
+            {dict.cta.primary}
           </Button>
         </Reveal>
       </div>

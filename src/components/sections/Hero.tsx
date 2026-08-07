@@ -8,8 +8,8 @@ import Eyebrow from '@/components/ui/Eyebrow';
 import Marker from '@/components/ui/Marker';
 import { EASE_SNAP, wordMask } from '@/lib/motion';
 import { useReducedMotionPref } from '@/lib/useMotionPreference';
-import { banners, cta } from '@/content/site';
-import { hero } from '@/content/home';
+import { banners, routes } from '@/content/site';
+import { href, type Dictionary, type Locale } from '@/content/i18n';
 
 /**
  * Hero — full-bleed banner, one viewport, copy over a warm gradient.
@@ -35,7 +35,8 @@ import { hero } from '@/content/home';
  * `object-position` is biased right so the subject stays in frame as the
  * viewport narrows — a centred crop pushes them off the edge on a phone.
  */
-export default function Hero() {
+export default function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const hero = dict.hero;
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotionPref();
 
@@ -60,7 +61,7 @@ export default function Hero() {
       >
         <Image
           src={banners.hero.src}
-          alt={banners.hero.alt}
+          alt={dict.banners.hero}
           fill
           unoptimized
           priority
@@ -144,11 +145,11 @@ export default function Hero() {
                 transition={{ duration: 0.5, delay: START + 0.38, ease: EASE_SNAP }}
                 className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
               >
-                <Button href={cta.primary.href} size="lg">
-                  {cta.primary.label}
+                <Button href={href(locale, routes.contact)} size="lg">
+                  {dict.cta.primary}
                 </Button>
-                <Button href={cta.login.href} variant="invert" size="lg">
-                  {cta.login.label}
+                <Button href={href(locale, routes.login)} variant="invert" size="lg">
+                  {dict.cta.login}
                 </Button>
               </motion.div>
             </div>

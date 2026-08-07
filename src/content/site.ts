@@ -1,23 +1,45 @@
 /**
- * Global site config: brand, nav, contact, banner art.
- * Everything a non-developer might want to change lives in /src/content.
+ * Locale-independent site config: URLs, routes, contact channels, artwork.
+ *
+ * Nothing translatable lives here — all copy is in /src/content/locales. Keeping
+ * routes and handles in one place means a link is defined once and only its
+ * label changes per language.
  */
 
 export const site = {
   name: 'ABA Tests Prep',
   domain: 'abatestsprep.com',
   url: 'https://abatestsprep.com',
-  positioning: 'Smart prep for studying abroad.',
-  description:
-    'DSAT, UDSP, IELTS, TOEFL, PTE and YDS prep for students heading to global universities — decoded into a plan built around you.',
 } as const;
 
-export const nav = [
-  { label: 'Exams', href: '/#exams' },
-  { label: 'Method', href: '/#method' },
-  { label: 'Pricing', href: '/#pricing' },
-  { label: 'Results', href: '/#results' },
-  { label: 'Blog', href: '/blog' },
+/** App-relative paths. The locale prefix is applied by `href()` at render time. */
+export const routes = {
+  home: '/',
+  exams: '/exams',
+  method: '/method',
+  results: '/results',
+  about: '/about',
+  blog: '/blog',
+  contact: '/contact',
+  login: '/login',
+  privacy: '/privacy',
+  terms: '/terms',
+  cancellation: '/cancellation',
+} as const;
+
+/** Primary nav. Labels come from `dict.nav[key]`. */
+export const navItems = [
+  { key: 'exams', href: '/#exams' },
+  { key: 'method', href: '/#method' },
+  { key: 'pricing', href: '/#pricing' },
+  { key: 'results', href: '/#results' },
+  { key: 'blog', href: routes.blog },
+] as const;
+
+export const legalItems = [
+  { key: 'privacy', href: routes.privacy },
+  { key: 'terms', href: routes.terms },
+  { key: 'cancellation', href: routes.cancellation },
 ] as const;
 
 export const contact = {
@@ -32,54 +54,9 @@ export const contact = {
   email: 'hello@abatestsprep.com',
   // TODO(client): real WhatsApp business number in E.164, no spaces.
   whatsapp: '+900000000000',
-  // TODO(client): swap for the real booking link (Calendly / form / WhatsApp).
-  bookingUrl: '/contact',
-} as const;
-
-export const cta = {
-  primary: { label: 'Book a free level analysis', href: contact.bookingUrl },
-  secondary: { label: 'See how it works', href: '/#method' },
-  login: { label: 'Log in', href: '/login' },
 } as const;
 
 export const whatsappUrl = `https://wa.me/${contact.whatsapp.replace(/[^0-9]/g, '')}`;
-
-/**
- * Art-directed banners, served from the weserv image CDN.
- *
- * These URLs already carry their own resize/encode parameters (`w=2048`,
- * `output=jpg`, `q=95`), so `Banner` renders them with `unoptimized` — running
- * them through Next's optimizer as well would re-encode an already-optimised
- * JPEG for no gain and add a server round trip.
- *
- * Every banner sits on a flat brand-colour block, so a slow or failed image
- * load degrades to a solid panel rather than to a hole in the page.
- */
-const cdn = (id: string) =>
-  `https://images.weserv.nl/?url=www.trybloom.ai/img/${id}&output=jpg&q=95&w=2048`;
-
-export const banners = {
-  hero: {
-    src: cdn('3388952a-25b0-4734-a67a-010fafe249e6'),
-    // TODO(client): replace with alt text describing what is actually in the
-    // photograph — this describes the intended subject, not the shot.
-    alt: 'An ABA Tests Prep student preparing for an international exam.',
-  },
-  journey: {
-    src: cdn('e2ed1638-1dda-4851-9531-63526fdba54a'),
-    alt: 'The route a student takes from first diagnostic to final score.',
-  },
-  upward: {
-    src: cdn('354cf176-06a9-4606-ae5c-c2eac19cac14'),
-    alt: 'Progress climbing toward a target score.',
-  },
-  community: {
-    src: cdn('013c0200-d151-4bf6-9719-3282ffb7f216'),
-    alt: 'ABA Tests Prep students together.',
-  },
-} as const;
-
-export type BannerKey = keyof typeof banners;
 
 /**
  * Threads was dropped: no URL was supplied for it, and a guessed link is worse
@@ -91,8 +68,85 @@ export const socials = [
   { label: 'LinkedIn', handle: 'ABA Tests Prep', href: contact.linkedinUrl, icon: 'linkedin' },
 ] as const;
 
-export const legalNav = [
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Terms', href: '/terms' },
-  { label: 'Cancellation Policy', href: '/cancellation' },
+/**
+ * Art-directed banners, served from the weserv image CDN.
+ *
+ * These URLs already carry their own resize/encode parameters, so `Banner`
+ * renders them with `unoptimized`. Every banner sits on a flat brand-colour
+ * block, so a slow or failed load degrades to a solid panel.
+ *
+ * `alt` is localised — see `dict.banners`.
+ */
+const cdn = (id: string) =>
+  `https://images.weserv.nl/?url=www.trybloom.ai/img/${id}&output=jpg&q=95&w=2048`;
+
+export const banners = {
+  hero: { src: cdn('3388952a-25b0-4734-a67a-010fafe249e6') },
+  journey: { src: cdn('e2ed1638-1dda-4851-9531-63526fdba54a') },
+  upward: { src: cdn('354cf176-06a9-4606-ae5c-c2eac19cac14') },
+  community: { src: cdn('013c0200-d151-4bf6-9719-3282ffb7f216') },
+} as const;
+
+export type BannerKey = keyof typeof banners;
+
+/** Exam order and numbering. All exam copy is localised. */
+export const examOrder = ['dsat', 'udsp', 'ielts', 'toefl', 'pte', 'yds'] as const;
+export type ExamSlug = (typeof examOrder)[number];
+
+/**
+ * Figures supplied by the client and published as given. Numbers are
+ * locale-independent; their labels are not.
+ */
+export const stats = [
+  { key: 'students', value: 5000, suffix: '' },
+  { key: 'improvement', value: 35, suffix: '%' },
+  { key: 'target', value: 90, suffix: '%' },
+  { key: 'offers', value: 500, suffix: '+' },
 ] as const;
+
+/** Aspirational destinations, not placement claims. Not translated — proper nouns. */
+export const universities = [
+  'Oxford',
+  'Cambridge',
+  'LSE',
+  'UCL',
+  'Imperial College',
+  'Stanford',
+  'MIT',
+  'Harvard',
+  'Columbia',
+  'NYU',
+  'Toronto',
+  'McGill',
+  'ETH Zürich',
+  'TU Delft',
+  'Bocconi',
+  'Sciences Po',
+  'KU Leuven',
+  'Melbourne',
+] as const;
+
+export const authority = {
+  name: 'Prof. Dr. Gamze Sart',
+  /**
+   * Supplied by the client. Hotlinked from gamzesart.com — consider saving a
+   * copy to /public/people/ and pointing this there, so the page does not
+   * depend on another domain staying up.
+   */
+  photo: 'https://gamzesart.com/img/gamze-sart.webp' as string | null,
+} as const;
+
+export const pricingFigures = {
+  premium: '$5,000',
+} as const;
+
+/**
+ * The testimonial renders only when a quote exists. Fill all three fields,
+ * with the student's consent, and the block appears. Localise by moving this
+ * into the dictionaries if you collect quotes in both languages.
+ */
+export const testimonial = {
+  quote: null as string | null,
+  name: null as string | null,
+  detail: null as string | null,
+} as const;

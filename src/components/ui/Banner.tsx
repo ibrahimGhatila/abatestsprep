@@ -30,6 +30,7 @@ const scrims: Record<ScrimTone, string> = {
  */
 export default function Banner({
   name,
+  alt,
   ratio = '4/5',
   scrim = 'flat-dark',
   bg = 'bg-charcoal',
@@ -40,6 +41,8 @@ export default function Banner({
   children,
 }: {
   name: BannerKey;
+  /** Localised description — see `dict.banners`. */
+  alt: string;
   /** CSS aspect-ratio string, or `auto` to fill a sized parent. */
   ratio?: string;
   scrim?: ScrimTone;
@@ -61,7 +64,7 @@ export default function Banner({
     <div className={`relative w-full overflow-hidden ${bg} ${className}`} style={{ aspectRatio: ratio }}>
       <Image
         src={banner.src}
-        alt={banner.alt}
+        alt={alt}
         fill
         unoptimized
         sizes={sizes}

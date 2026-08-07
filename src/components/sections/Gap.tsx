@@ -3,8 +3,8 @@ import Button from '@/components/ui/Button';
 import Eyebrow from '@/components/ui/Eyebrow';
 import Marker from '@/components/ui/Marker';
 import { Reveal } from '@/components/ui/Reveal';
-import { cta } from '@/content/site';
-import { gap } from '@/content/home';
+import { routes } from '@/content/site';
+import { href, type Dictionary, type Locale } from '@/content/i18n';
 
 /**
  * "The gap" — one statement and one button.
@@ -17,7 +17,8 @@ import { gap } from '@/content/home';
  * left a headline floating in a screen of empty cream — it is a band now, and
  * the page moves through it in a couple of seconds.
  */
-export default function Gap() {
+export default function Gap({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const gap = dict.gap;
   return (
     <section
       id="gap"
@@ -25,7 +26,7 @@ export default function Gap() {
     >
       {/* Banner: bleeds off the right edge, full section height, desktop only. */}
       <div className="absolute inset-y-0 right-0 hidden w-[31vw] max-w-[34rem] lg:block">
-        <Banner name="journey" ratio="auto" scrim="none" bg="bg-orange" sizes="31vw" className="h-full" />
+        <Banner name="journey" alt={dict.banners.journey} ratio="auto" scrim="none" bg="bg-orange" sizes="31vw" className="h-full" />
       </div>
 
       <div className="shell relative w-full">
@@ -39,14 +40,16 @@ export default function Gap() {
 
             <Reveal delay={0.05}>
               <h2 className="text-display-md font-black text-ink">
-                Most study hard.
+                {gap.lead}
                 <br />
-                We make sure they study <Marker delay={0.3}>right.</Marker>
+                {gap.before}
+                <Marker delay={0.3}>{gap.mark}</Marker>
+                {gap.after}
               </h2>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <Button href={cta.primary.href} size="lg" className="mt-9">
+              <Button href={href(locale, routes.contact)} size="lg" className="mt-9">
                 {gap.ctaLabel}
               </Button>
             </Reveal>
@@ -56,7 +59,7 @@ export default function Gap() {
 
       {/* Mobile: the banner sits below the statement. */}
       <Reveal className="mt-12 lg:hidden">
-        <Banner name="journey" ratio="2/1" scrim="none" bg="bg-orange" sizes="100vw" />
+        <Banner name="journey" alt={dict.banners.journey} ratio="2/1" scrim="none" bg="bg-orange" sizes="100vw" />
       </Reveal>
     </section>
   );
